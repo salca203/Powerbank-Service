@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLTKONTOR — Mobile Energieversorgung</title>
+<meta name="description" content="VOLTKONTOR. Ein kleines Unternehmen für mobile Energieversorgung.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='30' width='55' height='40' rx='4' fill='none' stroke='%231C1B18' stroke-width='6'/%3E%3Crect x='75' y='42' width='8' height='16' fill='%231C1B18'/%3E%3Cpolygon points='52,34 32,58 46,58 40,72 64,46 50,46' fill='%238B1E2B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #F6F2E9;
+    --paper-2: #EFE8D9;
+    --ink: #1C1B18;
+    --ink-soft: #565049;
+    --seal: #8B1E2B;
+    --navy: #1F3A52;
+    --line: rgba(28,27,24,0.16);
+    --redact: #171613;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Spectral', serif;
+    margin:0;
+    color:var(--ink);
+    font-weight:600;
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .eyebrow .dot{color:var(--seal); margin:0 8px;}
+
+  /* ---------- redaction motif ---------- */
+  .redact{
+    display:inline-block;
+    background:var(--redact);
+    color:transparent;
+    border-radius:2px;
+    cursor:help;
+    user-select:none;
+    transform:translateY(1px);
+    box-shadow:0 0 0 1px rgba(0,0,0,0.05);
+  }
+  .redact.short{width:3.2em;}
+  .redact.med{width:6.5em;}
+  .redact.long{width:10em;}
+
+  /* ---------- letterhead ---------- */
+  header.letterhead{
+    border-bottom:2px solid var(--navy);
+    border-top:1px solid var(--navy);
+    padding:18px 0;
+  }
+  header.letterhead .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .brand{display:flex; flex-direction:column;}
+  .brand .name{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    font-size:22px;
+    letter-spacing:0.04em;
+  }
+  .brand .sub{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+  nav.primary{display:flex; gap:26px;}
+  nav.primary a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    padding-bottom:4px;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s, color 0.2s;
+  }
+  nav.primary a:hover, nav.primary a:focus-visible{
+    color:var(--ink);
+    border-bottom-color:var(--seal);
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 80px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.3fr 0.7fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    line-height:1.12;
+    margin:18px 0 22px;
+    max-width:13ch;
+  }
+  .hero p.lede{
+    font-size:17px;
+    color:var(--ink-soft);
+    max-width:42ch;
+    margin-bottom:34px;
+  }
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:14px 22px;
+    border-radius:2px;
+    display:inline-block;
+    transition:transform 0.15s, opacity 0.15s;
+  }
+  .btn-primary{background:var(--ink); color:var(--paper);}
+  .btn-secondary{border:1px solid var(--navy); color:var(--navy);}
+  .btn:hover{transform:translateY(-1px); opacity:0.85;}
+  .btn:focus-visible{outline:2px solid var(--seal); outline-offset:2px;}
+
+  .seal-wrap{display:flex; justify-content:center;}
+  .seal{
+    transform:rotate(-9deg);
+    animation:sealIn 0.7s ease-out;
+  }
+  @keyframes sealIn{
+    from{opacity:0; transform:rotate(-25deg) scale(0.85);}
+    to{opacity:1; transform:rotate(-9deg) scale(1);}
+  }
+
+  /* ---------- sections generic ---------- */
+  section{padding:72px 0;}
+  .section-head{margin-bottom:42px; max-width:46ch;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem); margin-top:10px;}
+
+  /* ---------- services ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .card{
+    background:var(--paper-2);
+    padding:30px 26px;
+  }
+  .card .num{
+    font-family:'Spectral', serif;
+    font-style:italic;
+    color:var(--seal);
+    font-size:14px;
+    margin-bottom:14px;
+    display:block;
+  }
+  .card h3{font-size:19px; margin-bottom:12px;}
+  .card p{color:var(--ink-soft); font-size:15px; margin:0;}
+
+  /* ---------- stats ---------- */
+  .stats{
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--paper-2);
+  }
+  .stats .wrap{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    text-align:center;
+  }
+  .stat .redact{
+    height:0.95em;
+    width:5em;
+    margin:0 auto 14px;
+  }
+  .stat .label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- about ---------- */
+  .about .wrap{
+    display:grid;
+    grid-template-columns:0.8fr 1.2fr;
+    gap:50px;
+  }
+  .about blockquote{
+    margin:0;
+    font-family:'Spectral', serif;
+    font-style:italic;
+    font-size:26px;
+    line-height:1.35;
+    border-left:2px solid var(--seal);
+    padding-left:22px;
+    color:var(--ink);
+  }
+  .about .body p{color:var(--ink-soft); font-size:15.5px;}
+
+  /* ---------- contact ---------- */
+  .contact-card{
+    border:1px solid var(--navy);
+    padding:42px;
+    position:relative;
+  }
+  .contact-card::before{
+    content:"";
+    position:absolute; inset:8px;
+    border:1px dashed var(--line);
+    pointer-events:none;
+  }
+  .field-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  .field-row:last-child{border-bottom:none;}
+  .field-row .label{color:var(--ink-soft); letter-spacing:0.05em; text-transform:uppercase; font-size:11px;}
+  .doc-note{
+    margin-top:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:2px solid var(--navy);
+    padding:30px 0 40px;
+  }
+  footer .wrap{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    align-items:flex-end;
+  }
+  footer .legal{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+  footer .note{
+    font-family:'Spectral', serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--ink-soft);
+    max-width:34ch;
+    text-align:right;
+  }
+
+  @media (max-width: 760px){
+    .hero .wrap{grid-template-columns:1fr; gap:36px;}
+    .seal-wrap{order:-1;}
+    .seal{transform:rotate(-6deg) scale(0.8);}
+    .cards{grid-template-columns:1fr;}
+    .stats .wrap{grid-template-columns:1fr; gap:26px;}
+    .about .wrap{grid-template-columns:1fr; gap:30px;}
+    nav.primary{gap:16px;}
+    footer .wrap{flex-direction:column; align-items:flex-start;}
+    footer .note{text-align:left;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .seal{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="letterhead">
+  <div class="wrap">
+    <div class="brand">
+      <span class="name">VOLTKONTOR</span>
+      <span class="sub">Mobile Energieversorgung</span>
+    </div>
+    <nav class="primary">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Geschäftsmitteilung<span class="dot">·</span>Vertraulich</p>
+        <h1>Energie, dort wo sie gebraucht wird.</h1>
+        <p class="lede">Ein kleines Unternehmen für die Versorgung unterwegs. Mehr braucht es an dieser Stelle nicht zu wissen.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#leistungen">Leistungen ansehen</a>
+          <a class="btn btn-secondary" href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+      <div class="seal-wrap">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 200 200" width="180" height="180">
+            <defs>
+              <path id="sealCirclePath" d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0" />
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="#8B1E2B" stroke-width="1.3"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#8B1E2B" stroke-width="1.3"/>
+            <text font-family="'IBM Plex Mono', monospace" font-size="10.5" letter-spacing="3" fill="#8B1E2B">
+              <textPath href="#sealCirclePath" startOffset="2%">
+                GEPRÜFT · BESTÄTIGT · VOLTKONTOR ·
+              </textPath>
+            </text>
+            <g transform="translate(100,100)">
+              <rect x="-22" y="-14" width="40" height="28" rx="3" fill="none" stroke="#8B1E2B" stroke-width="2"/>
+              <rect x="18" y="-6" width="5" height="12" fill="#8B1E2B"/>
+              <polygon points="-3,-13 -13,3 -3,3 -10,14 12,-3 0,-3" fill="#8B1E2B"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Leistungen</p>
+        <h2>Was wir tun — in Kürze.</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="num">I.</span>
+          <h3>Mobile Energie</h3>
+          <p>Wir versorgen elektronische Geräte unterwegs mit der nötigen Energie — unkompliziert und zuverlässig.</p>
+        </div>
+        <div class="card">
+          <span class="num">II.</span>
+          <h3>Verleih &amp; Rückgabe</h3>
+          <p>Ausleihe und Rückgabe erfolgen nach einem klar geregelten, <span class="redact med" title="vertraulich" aria-label="vertraulich">██████</span> Verfahren.</p>
+        </div>
+        <div class="card">
+          <span class="num">III.</span>
+          <h3>Reichweite</h3>
+          <p>Verfügbar an ausgewählten <span class="redact long" title="vertraulich" aria-label="vertraulich">████████████</span> Standorten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="wrap">
+      <div class="stat">
+        <div class="redact" title="vertraulich" aria-label="vertraulich"></div>
+        <p class="label">Zufriedene Kunden</p>
+      </div>
+      <div class="stat">
+        <div class="redact" title="vertraulich" aria-label="vertraulich"></div>
+        <p class="label">Aktive Standorte</p>
+      </div>
+      <div class="stat">
+        <div class="redact" title="vertraulich" aria-label="vertraulich"></div>
+        <p class="label">Verliehene Powerbanks</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ueber-uns">
+    <div class="wrap about">
+      <blockquote>Eine einfache Idee, professionell umgesetzt.</blockquote>
+      <div class="body">
+        <p class="eyebrow" style="margin-bottom:16px;">Über uns</p>
+        <p>VOLTKONTOR wurde gegründet, um eine einfache Lücke zu schließen: unterwegs leer werdende Akkus. Aus dieser Beobachtung entstand ein kleines, fokussiertes Unternehmen mit klarer Struktur und kurzen Entscheidungswegen.</p>
+        <p>Wir verstehen uns als verlässlichen Begleiter im Alltag — diskret, unkompliziert und ohne unnötige Umwege.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Kontakt</p>
+        <h2>Sekretariat &amp; Anfragen</h2>
+      </div>
+      <div class="contact-card">
+        <div class="field-row"><span class="label">Telefon</span><span class="redact med" title="vertraulich" aria-label="vertraulich">████████</span></div>
+        <div class="field-row"><span class="label">E-Mail</span><span class="redact long" title="vertraulich" aria-label="vertraulich">████████████████</span></div>
+        <div class="field-row"><span class="label">Anschrift</span><span class="redact long" title="vertraulich" aria-label="vertraulich">████████████████████</span></div>
+        <p class="doc-note">Dok.-Nr. VK-0000-AA · Kontaktinformationen folgen in Kürze.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="legal">© <span id="year"></span> VOLTKONTOR — Alle Rechte vorbehalten.<br>Handelsregister: <span class="redact short" title="vertraulich" aria-label="vertraulich">████</span></p>
+    <p class="note">Diese Seite enthält bewusst keine weiteren Angaben.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
