@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><title>Spielzimmer</title><style>
+<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#118ab2"><meta name="description" content="Spielezimmer: 14 Spiele für ein Gerät, allein, gegen den Computer oder zu zweit. Ohne Ton, ohne Anmeldung, ohne Tracking."><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎲%3C/text%3E%3C/svg%3E"><title>Spielezimmer</title><style>
 :root{--bg:#e9eef2;--fg:#14213d;--card:#fff;--line:#c5d0da;--p0:#ef476f;--p1:#118ab2;--y:#ffd166;color-scheme:light}
 @media(prefers-color-scheme:dark){:root{--bg:#101826;--fg:#eaf0f7;--card:#1c2740;--line:#33415f;color-scheme:dark}}
 *{box-sizing:border-box;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-body{margin:0;font:600 18px ui-rounded,system-ui,sans-serif;background:var(--bg);color:var(--fg);padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom)}
-#app{margin:0 auto;padding-bottom:12px}
+body{margin:0;font:600 18px ui-rounded,system-ui,sans-serif;background:var(--bg);color:var(--fg);padding:env(safe-area-inset-top) max(14px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(14px,env(safe-area-inset-left))}
+#app{max-width:1200px;margin:0 auto;padding-bottom:12px}
 h1{font-size:34px;margin:18px 0 12px}
 button{font:inherit;color:inherit;border:0;cursor:pointer}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
@@ -45,19 +45,45 @@ input{font:inherit;padding:14px;border-radius:12px;border:2px solid var(--line);
 .dc{font-size:min(13vw,78px);background:var(--card);border-radius:14px;padding:0 4px;line-height:1.15}.dc.h{background:var(--y);color:#14213d}
 .kt{border-collapse:collapse}.kt td,.kt th{padding:6px 14px;border-bottom:1px solid var(--line);text-align:center}.kt td:first-child{text-align:left}.pk{background:var(--y);color:#14213d;cursor:pointer}
 .ch8{display:grid;grid-template-columns:repeat(8,1fr);border-radius:10px;overflow:hidden}.sq{aspect-ratio:1;padding:0;background:#dfe7ee;font-size:calc(min(100vw - 28px,100dvh - 110px)/10.5);position:relative;line-height:1}.sq.dk{background:#6f8fa8}.sq.sl{box-shadow:inset 0 0 0 4px var(--y)}.sq.tg::after{content:'';position:absolute;inset:36%;border-radius:50%;background:#ffd166cc}
-</style></head><body><div id="app"></div><script>
+html{-webkit-text-size-adjust:100%}[hidden]{display:none!important}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.sub{opacity:.75;font-weight:500;margin:0 0 14px;line-height:1.5}.cat{font-size:20px;margin:24px 0 10px}h1+.sub{margin-top:-6px}
+footer{max-width:1200px;margin:8px auto 18px;display:flex;gap:18px;justify-content:center;font-size:15px;opacity:.8}footer a{color:inherit}
+#legal{max-width:720px;margin:0 auto;font-weight:500;line-height:1.65}#legal,#legal *{-webkit-user-select:text;user-select:text}#legal h2{font-size:20px;margin:22px 0 6px}#legal a{color:var(--p1)}
+mark{background:var(--y);color:#14213d;border-radius:4px;padding:0 4px}
+@media(max-width:420px){body{font-size:16px}.tile{padding:12px}.tile span{font-size:32px}.grid{grid-template-columns:1fr 1fr}.kt td,.kt th{padding:5px 8px}.kb button{width:42px;height:46px}}
+</style></head><body><div id="app"></div>
+<div id="legal" hidden>
+<article id="impressum" hidden><p><a href="#">← Zurück zu den Spielen</a></p><h1>Impressum</h1>
+<h2>Angaben gemäß § 5 DDG</h2><p><mark>[Vor- und Nachname]</mark><br><mark>[Straße und Hausnummer]</mark><br><mark>[PLZ Ort]</mark><br>Deutschland</p>
+<h2>Kontakt</h2><p>E-Mail: <mark>[E-Mail-Adresse]</mark><br>Telefon: <mark>[Telefonnummer]</mark></p>
+<h2>Haftung für Inhalte</h2><p>Die Inhalte dieser Seite werden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität kann jedoch keine Gewähr übernommen werden. Als Diensteanbieter bin ich nach § 7 Abs. 1 DDG für eigene Inhalte auf dieser Seite nach den allgemeinen Gesetzen verantwortlich. Nach den §§ 8 bis 10 DDG bin ich nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Bei Bekanntwerden von Rechtsverletzungen entferne ich die betroffenen Inhalte umgehend.</p>
+<h2>Haftung für Links</h2><p>Diese Seite enthält keine Links zu externen Webseiten.</p>
+<h2>Urheberrecht</h2><p>Die Inhalte und der Quellcode dieser Seite unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung und Verbreitung außerhalb der Grenzen des Urheberrechts bedürfen meiner schriftlichen Zustimmung.</p></article>
+<article id="datenschutz" hidden><p><a href="#">← Zurück zu den Spielen</a></p><h1>Datenschutzerklärung</h1>
+<h2>1. Verantwortlicher</h2><p><mark>[Vor- und Nachname]</mark>, <mark>[Straße und Hausnummer]</mark>, <mark>[PLZ Ort]</mark>, Deutschland<br>E-Mail: <mark>[E-Mail-Adresse]</mark></p>
+<h2>2. Das Wichtigste in Kürze</h2><p>Diese Seite erhebt selbst keine personenbezogenen Daten. Es gibt keine Registrierung, keine Formulare, keine Cookies, keinen lokalen Speicher, keine Statistik- oder Werbedienste und keine von fremden Servern geladenen Schriftarten, Skripte oder Bilder. Alle Spiele laufen vollständig in Ihrem Browser. Eingaben, etwa das geheime Wort beim Galgenmännchen, verlassen Ihr Gerät nicht.</p>
+<h2>3. Hosting bei GitHub Pages</h2><p>Die Seite wird über GitHub Pages bereitgestellt (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA, ein Unternehmen der Microsoft-Gruppe). Beim Aufruf verarbeitet GitHub technisch notwendige Verbindungsdaten, insbesondere Ihre IP-Adresse, Datum und Uhrzeit, die aufgerufene Datei sowie Angaben zu Browser und Betriebssystem, und speichert sie in Server-Protokollen. Das dient dem sicheren und stabilen Betrieb der Seite. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung der Seite). Soweit Daten in die USA übermittelt werden, geschieht dies auf Grundlage des EU-U.S. Data Privacy Framework und/oder von Standardvertragsklauseln (Art. 45, 46 DSGVO). Auf diese Verarbeitung habe ich keinen Einfluss und erhalte die Protokolldaten nicht. Weitere Informationen finden Sie in der Datenschutzerklärung von GitHub (GitHub Privacy Statement).</p>
+<h2>4. Speicherdauer</h2><p>Ich speichere keine personenbezogenen Daten. Die Speicherdauer der Server-Protokolle richtet sich nach den Vorgaben von GitHub.</p>
+<h2>5. Ihre Rechte</h2><p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Wenden Sie sich dazu an die oben genannte E-Mail-Adresse. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO), zum Beispiel bei der Behörde Ihres Wohnorts.</p>
+<h2>6. Verschlüsselung</h2><p>Die Seite wird über eine verschlüsselte HTTPS-Verbindung ausgeliefert.</p><p>Stand: November 2026</p></article></div>
+<footer><a href="#impressum">Impressum</a><a href="#datenschutz">Datenschutz</a></footer>
+<noscript><p style="padding:20px;font:18px sans-serif">Für das Spielezimmer wird JavaScript benötigt.</p></noscript><script>
 const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 const app=document.getElementById('app'),R=n=>Math.floor(Math.random()*n),shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
 const dot=i=>`<i class="dot" style="background:var(--p${i})"></i>`;
 let tm=[],raf=0,names=['Spieler 1','Spieler 2'];
-const later=(f,ms)=>tm.push(setTimeout(f,ms)),clear=()=>{tm.forEach(clearTimeout);tm=[];cancelAnimationFrame(raf);onresize=null;app.innerHTML=''};
+const later=(f,ms)=>tm.push(setTimeout(f,ms)),clear=()=>{tm.forEach(clearTimeout);tm=[];cancelAnimationFrame(raf);onresize=onkeydown=null;app.innerHTML=''};
 const FL="DE Deutschland,FR Frankreich,IT Italien,ES Spanien,PT Portugal,NL Niederlande,BE Belgien,CH Schweiz,AT Österreich,PL Polen,CZ Tschechien,DK Dänemark,SE Schweden,NO Norwegen,FI Finnland,IE Irland,GB Vereinigtes Königreich,GR Griechenland,TR Türkei,UA Ukraine,HU Ungarn,HR Kroatien,RO Rumänien,RU Russland,US USA,CA Kanada,MX Mexiko,BR Brasilien,AR Argentinien,CL Chile,JP Japan,CN China,KR Südkorea,IN Indien,AU Australien,NZ Neuseeland,ZA Südafrika,EG Ägypten,MA Marokko,KE Kenia,NG Nigeria,TH Thailand,IS Island,LT Litauen".split(',').map(x=>[x.slice(0,2),x.slice(3)]);
 const fl=c=>String.fromCodePoint(...[...c].map(h=>127397+h.charCodeAt(0)));
 const TH={a:[...'🐶🐱🐭🐹🐰🦊🐻🐼🐨🐯🦁🐮🐷🐸🐵🐔🐧🦉🦄🐢'],f:[...'🍎🍌🍇🍓🍒🍑🍍🥝🍉🍋🥕🌽🍕🍔🍟🍩🍪🍦🥐🧀'],v:[...'🚗🚕🚌🚎🚓🚑🚒🚜🚲🛵🚂🚁🚀⛵🚤🚢🚙🚚🚛'],fl:FL.map(x=>fl(x[0]))};
 function bar(r){const d=$('div','bar'),b=$('button','sm','← Menü'),s=$('div','st');b.onclick=menu;d.append(b,s);if(r){const n=$('button','sm','↻');n.onclick=()=>{clear();r()};d.append(n)}app.append(d);return s}
 const VS=['m','Gegner',[['Computer',1],['Zu zweit',2]]],ONE=['m','Spieler',[['Allein',1],['Zu zweit',2]]];
-function menu(){clear();app.append($('h1',0,'🎲 Spielezimmer'));const g=$('div','grid');GAMES.forEach(x=>{const b=$('button','tile',`<span>${x.i}</span>${x.n}<small>${x.d}</small>`);b.onclick=()=>x.o.length?setup(x):start(x,{});g.append(b)});app.append(g)}
-function setup(x){clear();app.append($('h1',0,x.i+' '+x.n));const o={};
+const CAT=[['Brettspiele',['Schach','Mühle','Vier in einer Reihe','Reversi','Mancala','Kästchen','Ultimate Tic-Tac-Toe']],['Merken, Raten und Würfeln',['Paare finden','Flaggen-Quiz','Galgenmännchen','Würfelkönig']],['Reaktion und Geschick',['Tap-Duell','Tauziehen','Air Hockey']]];
+const RULES={'Schach':'Wer den gegnerischen König mattsetzt, gewinnt. Figur antippen, dann Zielfeld. Ohne Rochade und En passant.','Mühle':'Je 9 Steine setzen, dann ziehen. Drei in einer Reihe: gegnerischen Stein entfernen. Mit nur 3 Steinen darfst du springen.','Vier in einer Reihe':'Spalte antippen, der Stein fällt nach unten. Wer zuerst vier in einer Reihe hat, gewinnt.','Reversi':'Gegnerische Steine einkesseln und umdrehen. Wer am Ende mehr Steine hat, gewinnt.','Mancala':'Mulde antippen und Steine verteilen. Endet der letzte im eigenen Speicher, bist du nochmal dran.','Kästchen':'Linien setzen. Wer ein Kästchen schließt, bekommt es und darf nochmal.','Ultimate Tic-Tac-Toe':'Dein Zug bestimmt das Feld des Gegners. Gewinne drei kleine Felder in einer Reihe.','Paare finden':'Zwei Karten aufdecken. Paar gefunden? Dann bist du nochmal dran. Das Raster passt sich dem Bildschirm an.','Flaggen-Quiz':'10 Flaggen, vier Antworten. Zu zweit wechselt ihr euch ab.','Galgenmännchen':'Rate das Wort Buchstabe für Buchstabe. Nach 8 Fehlern ist das Spiel verloren.','Würfelkönig':'Bis zu 3 Würfe pro Runde. Würfel antippen zum Behalten, dann ein Feld wählen. 13 Runden.','Tap-Duell':'Warte auf JETZT und tippe als Erster. Zu früh tippen gibt dem anderen den Punkt. Tastatur: Leertaste oder L (zweiter Spieler: A).','Tauziehen':'Tippe so schnell du kannst auf deine Seite. Tastatur: Leertaste oder L (zweiter Spieler: A).','Air Hockey':'Schläger mit Finger oder Maus bewegen. Wer zuerst 5 Tore schießt, gewinnt.'};
+function menu(){clear();app.append($('h1',0,'🎲 Spielezimmer'),$('p','sub','14 Spiele für ein Gerät: allein, gegen den Computer oder zu zweit. Ohne Ton, ohne Anmeldung, ohne Tracking.'));
+CAT.forEach(([t,ns])=>{app.append($('h2','cat',t));const g=$('div','grid');ns.forEach(n=>{const x=GAMES.find(y=>y.n==n),b=$('button','tile',`<span>${x.i}</span>${x.n}<small>${x.d}</small>`);b.onclick=()=>setup(x);g.append(b)});app.append(g)})}
+function setup(x){clear();app.append($('h1',0,x.i+' '+x.n),$('p','sub',RULES[x.n]||''));const o={};
 x.o.forEach(([k,l,v])=>{o[k]=v[0][1];const s=$('div','seg',`<b>${l}</b>`),d=$('div');v.forEach(([t,val],i)=>{const b=$('button',i?'':'on',t);b.onclick=()=>{o[k]=val;[...d.children].forEach(c=>c.className='');b.className='on'};d.append(b)});s.append(d);app.append(s)});
 const go=$('button','start','Los geht’s'),b=$('button','sm','← Menü');go.onclick=()=>start(x,o);b.onclick=menu;app.append(go,b)}
 function start(x,o){clear();names=o.m==1?['Du','Computer']:['Spieler 1','Spieler 2'];x.f(o)}
@@ -126,18 +152,18 @@ const z=[0,1].map(i=>{const d=$('button','zone');d.style.background=`var(--p${i}
 const show=m=>z.forEach((d,i)=>d.innerHTML=`<span style="font-size:52px">${sc[i]}</span><br>${m[i]}`);
 const round=()=>{go=bz=0;show(['Warten … noch nicht tippen','Warten … noch nicht tippen']);later(()=>{go=1;show(['JETZT TIPPEN!','JETZT TIPPEN!']);if(o.m==1)later(()=>hit(0),330+R(330))},1500+R(3000))};
 const hit=i=>{if(bz)return;bz=1;tm.forEach(clearTimeout);tm=[];const wn=go?i:1-i;sc[wn]++;show([0,1].map(k=>k==wn?(go?'Schneller! ✔':'Gegner war zu früh ✔'):(go?'Zu langsam':'Zu früh! ✖')));
-if(sc[wn]>=5)later(()=>show([0,1].map(k=>k==wn?'🏆 Gewonnen!':'Verloren')),1200);else later(round,1500)};round()}
+if(sc[wn]>=5)later(()=>show([0,1].map(k=>k==wn?'🏆 Gewonnen!':'Verloren')),1200);else later(round,1500)};onkeydown=e=>{if(e.key=='l'||e.key==' ')hit(1);if(e.key=='a'&&o.m==2)hit(0)};round()}
 
 function tug(o){const s=bar(()=>tug(o));s.textContent='So schnell wie möglich tippen!';let p=50,ov=0;const w=$('div','duel');app.append(w);
 const z=[0,1].map(i=>{const d=$('button','zone','<span style="font-size:52px">👆</span>');d.style.background=`var(--p${i})`;if(!i)d.style.transform='rotate(180deg)';
-d.onpointerdown=()=>push(i);w.append(d);return d});const push=i=>{if(ov)return;p+=i?-3:3;z[0].style.flex=p;z[1].style.flex=100-p;if(p>=92||p<=8){ov=1;const t=p>=92?0:1;z[t].innerHTML='🏆 Gewonnen!';z[1-t].innerHTML='Verloren'}};const ai=()=>{if(!ov){push(0);later(ai,140+R(120))}};if(o.m==1)later(ai,1000)}
+d.onpointerdown=()=>push(i);w.append(d);return d});const push=i=>{if(ov)return;p+=i?-3:3;z[0].style.flex=p;z[1].style.flex=100-p;if(p>=92||p<=8){ov=1;const t=p>=92?0:1;z[t].innerHTML='🏆 Gewonnen!';z[1-t].innerHTML='Verloren'}};const ai=()=>{if(!ov){push(0);later(ai,140+R(120))}};if(o.m==1)later(ai,1000);onkeydown=e=>{if(e.key=='l'||e.key==' ')push(1);if(e.key=='a'&&o.m==2)push(0)}}
 
 function hockey(o){const s=bar(()=>hockey(o)),W=400,H=700,cv=$('canvas','hk');cv.width=W;cv.height=H;app.append(cv);const x=cv.getContext('2d'),cl=[0,1].map(i=>getComputedStyle(document.documentElement).getPropertyValue('--p'+i));
 let pk={x:W/2,y:H/2,vx:0,vy:0},pd=[{x:200,y:90,px:200,py:90,vx:0,vy:0},{x:200,y:610,px:200,py:610,vx:0,vy:0}],sc=[0,0],hold=60,ids={},over=0;
 const u=()=>s.innerHTML=over?`${dot(over-1)}${names[over-1]} gewinnt! 🏆`:`${dot(0)}${sc[0]} : ${sc[1]}${dot(1)}`;u();
 const pos=e=>{const r=cv.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height}};
 const mvp=e=>{const i=ids[e.pointerId];if(i==null)return;const p=pos(e);pd[i].x=Math.max(35,Math.min(W-35,p.x));pd[i].y=i?Math.max(H/2+35,Math.min(H-35,p.y)):Math.max(35,Math.min(H/2-35,p.y))};
-cv.onpointerdown=e=>{cv.setPointerCapture(e.pointerId);ids[e.pointerId]=o.m==1?1:pos(e).y<H/2?0:1;mvp(e)};cv.onpointermove=mvp;cv.onpointerup=cv.onpointercancel=e=>delete ids[e.pointerId];
+cv.onpointerdown=e=>{cv.setPointerCapture(e.pointerId);ids[e.pointerId]=o.m==1?1:pos(e).y<H/2?0:1;mvp(e)};cv.onpointermove=e=>{if(e.pointerType=='mouse'&&o.m==1)ids[e.pointerId]=1;mvp(e)};cv.onpointerup=cv.onpointercancel=e=>delete ids[e.pointerId];
 const ball=(px,py,r,c)=>{x.fillStyle=c;x.beginPath();x.arc(px,py,r,0,7);x.fill()};
 const tick=()=>{pd.forEach(p=>{p.vx=p.x-p.px;p.vy=p.y-p.py;p.px=p.x;p.py=p.y});
 if(o.m==1){const a=pd[0],ty=pk.y<H/2-20?Math.min(pk.y-45,H/2-40):80;a.x+=Math.max(-6,Math.min(6,pk.x-a.x));a.y+=Math.max(-6,Math.min(6,Math.max(35,ty)-a.y))}
@@ -158,7 +184,7 @@ s.textContent=won?'🎉 Gelöst!':m>=8?'Verloren – '+w:`Fehler: ${m}/8`;kb.que
 [...'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ'].forEach(c=>{const b=$('button',0,c);b.onclick=()=>{g.add(c);if(!w.includes(c))m++;draw()};kb.append(b)});draw()};
 if(o.m==1)play(WD[R(WD.length)]);else{s.textContent=names[0]+': Wort eingeben, Spieler 2 schaut weg';const i=$('input'),b=$('button','start','Los');i.type='password';i.placeholder='Geheimes Wort';b.onclick=()=>{const w=i.value.toUpperCase().replace(/[^A-ZÄÖÜ]/g,'');if(w.length>1)play(w)};box.append(i,b)}}
 
-function kn(o){const s=bar(()=>kn(o)),ai=o.m==3,np=o.m==1?1:2,CT=['Einser','Zweier','Dreier','Vierer','Fünfer','Sechser','Dreierpasch','Viererpasch','Full House','Kleine Straße','Große Straße','Kniffel','Chance'],EX=[3,6,9,12,15,18,22,13,13,12,16,18,22];if(ai)names=['Du','Computer'];
+function kn(o){const s=bar(()=>kn(o)),ai=o.m==3,np=o.m==1?1:2,CT=['Einser','Zweier','Dreier','Vierer','Fünfer','Sechser','Dreierpasch','Viererpasch','Full House','Kleine Straße','Große Straße','Fünferpasch','Chance'],EX=[3,6,9,12,15,18,22,13,13,12,16,18,22];if(ai)names=['Du','Computer'];
 const S=[...Array(np)].map(()=>Array(13).fill(null)),box=$('div','kn');let d=[1,1,1,1,1],hd=[0,0,0,0,0],rl=0,cur=0,done=0;app.append(box);
 const pts=(k,d)=>{const c=[0,0,0,0,0,0,0];d.forEach(v=>c[v]++);const sm=d.reduce((a,b)=>a+b),mx=Math.max(...c),r=(...a)=>a.every(v=>c[v]);return k<6?c[k+1]*(k+1):k==6?(mx>=3?sm:0):k==7?(mx>=4?sm:0):k==8?(c.includes(3)&&c.includes(2)?25:0):k==9?(r(1,2,3,4)||r(2,3,4,5)||r(3,4,5,6)?30:0):k==10?(r(1,2,3,4,5)||r(2,3,4,5,6)?40:0):k==11?(mx==5?50:0):sm};
 const tot=p=>{const u=S[p].slice(0,6).reduce((a,b)=>a+b,0);return S[p].reduce((a,b)=>a+b,0)+(u>=63?35:0)},hum=()=>!(ai&&cur==1);
@@ -209,9 +235,9 @@ e.style.color=own(p,true)?'#fff':'#111';if(own(p,true))e.style.textShadow='0 0 3
 s.innerHTML=over?(over==3?'Patt – Unentschieden':dot(+(over==2))+names[+(over==2)]+' gewinnt durch Schachmatt! 🏆'):`${dot(cur)}${names[cur]}${chk(b,cur==0)?' · Schach!':''}`};draw()}
 
 const GAMES=[
-{n:'Memory',i:'🃏',d:'4 Motive, 3 Stufen, 1–2 Spieler',f:mem,o:[['th','Motive',[['🐶 Tiere','a'],['🍕 Essen','f'],['🚗 Fahrzeuge','v'],['🏳️ Flaggen','fl']]],['sz','Schwierigkeit',[['Leicht · 4×4',16],['Mittel · 4×6',24],['Schwer · 6×6',36],['Experte · 5×8',40]]],ONE]},
+{n:'Paare finden',i:'🃏',d:'4 Motive, 3 Stufen, 1–2 Spieler',f:mem,o:[['th','Motive',[['🐶 Tiere','a'],['🍕 Essen','f'],['🚗 Fahrzeuge','v'],['🏳️ Flaggen','fl']]],['sz','Schwierigkeit',[['Leicht · 4×4',16],['Mittel · 4×6',24],['Schwer · 6×6',36],['Experte · 5×8',40]]],ONE]},
 {n:'Flaggen-Quiz',i:'🏳️',d:'Allein oder zu zweit',f:quiz,o:[ONE]},
-{n:'Vier gewinnt',i:'🔴',d:'Computer oder zu zweit',f:c4,o:[VS]},
+{n:'Vier in einer Reihe',i:'🔴',d:'Computer oder zu zweit',f:c4,o:[VS]},
 {n:'Reversi',i:'⚫',d:'Computer oder zu zweit',f:rev,o:[VS]},
 {n:'Kästchen',i:'⬜',d:'Computer oder zu zweit',f:dots,o:[VS]},
 {n:'Mancala',i:'🌰',d:'Computer oder zu zweit',f:mnc,o:[VS]},
@@ -221,7 +247,9 @@ const GAMES=[
 {n:'Air Hockey',i:'🏒',d:'Computer oder zu zweit',f:hockey,o:[VS]},
 {n:'Schach',i:'♟️',d:'Computer oder zu zweit',f:chess,o:[VS]},
 {n:'Mühle',i:'⭕',d:'Computer oder zu zweit',f:mu,o:[VS]},
-{n:'Kniffel',i:'🎲',d:'Allein, Computer oder zu zweit',f:kn,o:[['m','Modus',[['Allein',1],['Zu zweit',2],['Gegen Computer',3]]]]},
+{n:'Würfelkönig',i:'🎲',d:'Allein, Computer oder zu zweit',f:kn,o:[['m','Modus',[['Allein',1],['Zu zweit',2],['Gegen Computer',3]]]]},
 {n:'Galgenmännchen',i:'🔤',d:'Allein oder zu zweit',f:hang,o:[ONE]}];
-menu();
+const LG=document.getElementById('legal');
+function route(){const h=location.hash.slice(1),L=h=='impressum'||h=='datenschutz';app.hidden=L;LG.hidden=!L;LG.querySelectorAll('article').forEach(x=>x.hidden=x.id!=h);if(L)scrollTo(0,0);else if(!app.children.length)menu()}
+onhashchange=route;route();
 </script></body></html>
