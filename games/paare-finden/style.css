@@ -1,0 +1,8 @@
+.mem{display:grid;gap:8px}
+.card{aspect-ratio:1;border-radius:14px;background:var(--p1);font-size:var(--f);padding:0;line-height:1}
+.card.up{background:var(--card)}
+.card.ok{opacity:.4}
+.mem{justify-content:center}
+.card{width:var(--z);height:var(--z);aspect-ratio:auto}
+.card.up{animation:flip .3s ease}
+@keyframes flip{from{transform:rotateY(90deg) scale(.9)}to{transform:none}}

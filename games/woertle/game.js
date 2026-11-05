@@ -1,0 +1,10 @@
+// Wörtle
+function wd(o){const s=bar(()=>wd(o)),WL='APFEL BIRNE BLUME BRIEF BRUST BUCHE DACHS DECKE ENGEL FARBE FEUER FILME FISCH FLUSS FRAGE FUCHS GABEL GRUND HAFEN HASEN HONIG HUNDE INSEL JUNGE KATZE KERZE KLEID KOHLE KRAFT KREIS LAMPE LEBEN LICHT LINSE LÖWEN MACHT MAUER MILCH MONAT MÜHLE MUSIK NACHT NADEL NEBEL OZEAN PFERD PILZE PUPPE QUARK RADIO REGEL REISE ROBBE ROSEN SCHAF SCHAL SCHUH SEIDE SONNE SPIEL STADT STEIN STERN STIFT STUHL TASSE TIGER TISCH TRAUM TÜREN VOGEL WAAGE WELLE WIESE WOLKE WURST ZEBRA ZIEGE ZWERG BLITZ BAUER DRUCK'.split(' '),w=WL[R(WL.length)],box=$('div','wg'),kb=$('div','wk');let rows=[],cur='',done=0,kc={};app.append(box,kb);
+const sc=g=>{const r=Array(5).fill('a'),u=[...w];for(let i=0;i<5;i++)if(g[i]==w[i]){r[i]='g';u[i]=null}for(let i=0;i<5;i++)if(r[i]=='a'){const k=u.indexOf(g[i]);if(k>=0){r[i]='y';u[k]=null}}return r},rk={g:3,y:2,a:1};
+const draw=()=>{box.innerHTML='';for(let r=0;r<6;r++){const row=$('div','wr'),g=rows[r];for(let c=0;c<5;c++)row.append($('div','wc'+(g?' '+g.s[c]:''),g?g.w[c]:r==rows.length?cur[c]||'':''));box.append(row)}
+kb.innerHTML='';['QWERTZUIOPÜ','ASDFGHJKLÖÄ','⏎YXCVBNM⌫'].forEach(l=>{const row=$('div','wr');[...l].forEach(k=>{const b=$('button','wkb '+(kc[k]||''),k);b.onclick=()=>key(k);row.append(b)});kb.append(row)});
+s.textContent=done==1?'🎉 Richtig!':done==2?'Das Wort war '+w:`Versuch ${Math.min(rows.length+1,6)} von 6`};
+const key=k=>{if(done)return;if(k=='⌫')cur=cur.slice(0,-1);else if(k=='⏎'){if(cur.length<5)return;const r=sc(cur);rows.push({w:cur,s:r});[...cur].forEach((ch,i)=>{if(!kc[ch]||rk[r[i]]>rk[kc[ch]])kc[ch]=r[i]});if(cur==w)done=1;else if(rows.length>=6)done=2;cur=''}else if(cur.length<5&&/^[A-ZÄÖÜ]$/.test(k))cur+=k;draw()};
+onkeydown=e=>key(e.key=='Enter'?'⏎':e.key=='Backspace'?'⌫':e.key.toUpperCase());draw()}
+
+registerGame({"id": "woertle", "n": "Wörtle", "i": "🔠", "cat": "Wörter & Quiz", "c": ["#16a34a", "#0f766e"], "fl": "nt", "pl": "1", "rules": "Errate das Wort mit 5 Buchstaben in 6 Versuchen. Grün: richtig. Gelb: falscher Platz. Grau: kommt nicht vor.", "o": [], "css": true,f:wd});

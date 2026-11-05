@@ -1,0 +1,5 @@
+.flag{text-align:center;font-size:min(30vw,170px);line-height:1.2}
+.ch{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:var(--card);border-radius:14px;padding:18px 8px}
+.good{background:#2a9d5c!important;color:#fff}
+.bad{background:var(--p0)!important;color:#fff}

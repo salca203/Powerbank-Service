@@ -1,0 +1,3 @@
+// Geteilte Daten: Länderliste und Flaggen-Emoji (Flaggen-Quiz und Paare finden)
+const FL="DE Deutschland,FR Frankreich,IT Italien,ES Spanien,PT Portugal,NL Niederlande,BE Belgien,CH Schweiz,AT Österreich,PL Polen,CZ Tschechien,DK Dänemark,SE Schweden,NO Norwegen,FI Finnland,IE Irland,GB Vereinigtes Königreich,GR Griechenland,TR Türkei,UA Ukraine,HU Ungarn,HR Kroatien,RO Rumänien,RU Russland,US USA,CA Kanada,MX Mexiko,BR Brasilien,AR Argentinien,CL Chile,JP Japan,CN China,KR Südkorea,IN Indien,AU Australien,NZ Neuseeland,ZA Südafrika,EG Ägypten,MA Marokko,KE Kenia,NG Nigeria,TH Thailand,IS Island,LT Litauen".split(',').map(x=>[x.slice(0,2),x.slice(3)]);
+const fl=c=>String.fromCodePoint(...[...c].map(h=>127397+h.charCodeAt(0)));

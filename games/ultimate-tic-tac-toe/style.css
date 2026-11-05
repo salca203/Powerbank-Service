@@ -1,0 +1,5 @@
+.ut{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sb{aspect-ratio:1;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--card);border-radius:10px;padding:4px;position:relative}
+.sb.act{outline:3px solid var(--y)}
+.sb em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:min(14vw,90px)}
+.uc{background:var(--bg);border-radius:6px;font-size:min(5vw,34px);padding:0}
