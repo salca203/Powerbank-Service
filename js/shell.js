@@ -19,7 +19,7 @@ function menu(v){if(typeof v!='string')v=VIEW;VIEW=v;clear();side();const A=GAME
 if(v.startsWith('c:')){const c=v.slice(2);T[v]=[c,A.filter(g=>META[g.n][0]==c)]}
 if(v!='home'){const[t,l]=T[v]||T.empf;app.append($('h1',0,t));const e=$('div','gg');l.forEach(g=>e.append(card(g)));app.append(l.length?e:$('p','sub',v=='fav'?'Tippe bei einem Spiel auf das Herz, dann steht es hier.':v=='such'?'Nichts gefunden.':'Hier ist noch nichts, spiel ein bisschen.'));return}
 app.append($('div','hero',`<h1>🎲 Spielezimmer</h1><p>${A.length} Spiele direkt im Browser. Ohne Download, ohne Ton, ohne Tracking. Allein, gegen den Computer oder zu zweit an einem Gerät.</p>`));
-const sec=(t,l,vw)=>{if(!l.length)return;const h=$('div','sec',`<h2>${t}</h2>`);if(vw){const b=$('button',0,'Alle ansehen →');b.onclick=()=>menu(vw);h.append(b)}app.append(h);const e=$('div','gg');l.slice(0,vw?6:99).forEach(g=>e.append(card(g)));app.append(e)};
+const sec=(t,l,vw)=>{if(!l.length)return;const h=$('div','sec',`<h2>${t}</h2>`);if(vw){const b=$('button',0,'Alle ansehen →');b.onclick=()=>menu(vw);h.append(b)}app.append(h);const e=$('div',vw?'gg row':'gg');l.forEach(g=>e.append(card(g)));app.append(e)};
 sec('🕑 Weiterspielen',T.rec[1],'rec');sec('🔥 Empfohlen',T.empf[1],'empf');sec('✨ Neu',T.neu[1],'neu');sec('👥 Zu zweit',T.zwei[1],'zwei');CATS.forEach(([c,i])=>sec(i+' '+c,A.filter(g=>META[g.n][0]==c),'c:'+c))}
 function modal(el){md.innerHTML='';const b=$('div','mbx');b.append(el);md.append(b);md.hidden=false}
 md.onclick=e=>{if(e.target==md)md.hidden=true};addEventListener('keydown',e=>{if(e.key=='Escape')md.hidden=true});

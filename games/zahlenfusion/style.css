@@ -1,0 +1,6 @@
+.g48{position:relative;display:grid;grid-template-columns:repeat(4,1fr);width:min(100%,calc(100dvh - 215px),460px);aspect-ratio:1;background:#2a2358;border-radius:14px;margin:0 auto;touch-action:none;font-size:min(10vw,56px)}
+.g48 .tb{margin:4px;background:#3a3070;border-radius:10px}
+.tl{position:absolute;left:0;top:0;width:25%;height:25%;transition:transform .12s ease}
+.tl i{position:absolute;inset:4px;border-radius:10px;display:grid;place-items:center;font-style:normal;font-weight:900}
+.tl.new i{animation:pop2 .22s ease}.tl.mg i{animation:pop2 .2s ease}
+@keyframes pop2{from{transform:scale(.5)}60%{transform:scale(1.12)}}
