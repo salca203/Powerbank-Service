@@ -1,4 +1,5 @@
-import io,re,json,base64,random,sys
+import io,re,json,base64,random,sys,os
+ONLY=[x for x in os.environ.get('ONLY','').split(',') if x]  # z. B. ONLY=Schach,Mühle nur diese Spiele neu erzeugen
 from pathlib import Path
 """Erzeugt die Vorschaubilder (games/<id>/thumb.webp) aus echten Spielszenen.
 Benötigt: pip install playwright pillow && playwright install chromium
@@ -80,11 +81,39 @@ def run():
         def shi():
             b=box();N=5;C=b['width']/N
             for (r0,c0,r1,c1) in ((0,0,1,1),(2,0,4,0),(0,3,3,4)):drag((b['x']+(c0+.5)*C,b['y']+(r0+.5)*C),(b['x']+(c1+.5)*C,b['y']+(r1+.5)*C));w(250)
+        def clickc(fx,fy):
+            b=box();pg.mouse.click(b['x']+b['width']*fx,b['y']+b['height']*fy)
+        def crossy():
+            for _ in range(2):clickc(.5,.5);w(220)
+            w(100)
+        def paper():
+            for k in ('ArrowDown','ArrowRight','ArrowUp','ArrowLeft'):pg.keyboard.press(k);w(700)
+            w(300)
+        def zahlen():
+            for k in ('ArrowLeft','ArrowUp','ArrowRight','ArrowDown')*3:pg.keyboard.press(k);w(170)
+        def schlange():
+            pg.keyboard.press('ArrowRight');w(600);pg.keyboard.press('ArrowDown');w(500);pg.keyboard.press('ArrowRight');w(300)
+        def minen():pg.locator('.mc').nth(40).click();w(300)
+        def tetris():
+            clickc(.4,.5);w(300)
+            for a,b2 in (('ArrowLeft','Space'),('ArrowRight','Space'),('ArrowUp','Space'),('ArrowLeft','ArrowLeft')):
+                pg.keyboard.press(a);pg.keyboard.press(b2);w(250)
+        def stein():clickc(.5,.8);w(900);pg.mouse.move(*at(150,520,400,560));w(300)
+        def turm():
+            for _ in range(5):clickc(.5,.5);w(620)
+        def schieb():
+            for i in (7,5,4):pg.locator('.st2').nth(i).click();w(200)
+        def flut():
+            for i in (2,4,1):pg.locator('.pc2').nth(i).click();w(120)
+        def licht():
+            for i in (3,7,12):pg.locator('.lt').nth(i).click();w(120)
+        def folge():w(1500)
         spec={'Schach':('d',schach),'Mühle':('d',muehle),'Vier in einer Reihe':('d',vier),'Reversi':('d',reversi),'Mancala':('d',mancala),'Kästchen':('d',kaest),'Tic-Tac-Toe':('d',ttt),'Ultimate Tic-Tac-Toe':('d',uttt),
         'Paare finden':('d',lambda:clicks('.card',[0,1],60)),'Flaggen-Quiz':('d',lambda:w(200)),'Galgenmännchen':('d',galgen),'Würfelkönig':('d',wuerfel),'Wörtle':('d',woertle),
         'Tap-Duell':('d',lambda:w(900)),'Tauziehen':('d',tau),'Kaktoku':('d',kak),'Shikaku':('cc',shi),
-        'Air Hockey':('cc',hockey),'Flatterflug':('cc',flatter),'Blasenschuss':('c',bubble,.3),'Block-Blitz':('cc',block),'Neon-Dash':('c',dash,.6),'Spiral-Sprung':('c',spiral,.35)}
+        'Air Hockey':('cc',hockey),'Flatterflug':('cc',flatter),'Blasenschuss':('c',bubble,.3),'Block-Blitz':('cc',block),'Neon-Dash':('c',dash,.6),'Spiral-Sprung':('c',spiral,.35),'Straßenhüpfer':('cc',crossy),'Farbland':('cc',paper),'Zahlenfusion':('d',zahlen),'Schlangenjagd':('cc',schlange),'Minenfeld':('d',minen),'Blockfall':('cc',tetris),'Steinbrecher':('c',stein,.2),'Turmbau':('cc',turm),'Schiebepuzzle':('d',schieb),'Farbflut':('d',flut),'Lichter aus':('d',licht),'Farbfolge':('d',folge)}
         for n,s in spec.items():
+            if ONLY and n not in ONLY:continue
             open_game(n);s[1]()
             c1,c2=META[n][1],META[n][2]
             im=dom() if s[0]=='d' else cvs()
