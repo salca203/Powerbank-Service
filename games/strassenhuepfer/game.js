@@ -1,10 +1,10 @@
 // Straßenhüpfer
-function cr(o){const s=bar(()=>cr(o)),T=44,CO=9,W=T*CO,VR=13,H=T*VR,cv=$('canvas','hk'),key='cr',CC=['#ef476f','#ffd166','#06d6a0','#118ab2','#f4a261'];cv.width=W;cv.height=H;app.append(cv);const x=cv.getContext('2d');let best=0;try{best=+localStorage.getItem(key)||0}catch(e){}
+function cr(o){const s=bar(()=>cr(o)),T=44,CO=9,W=T*CO,VR=13,H=T*VR,cv=$('canvas','hk'),key='cr'+o.d,DF=[.7,1,1.35][o.d],CC=['#ef476f','#ffd166','#06d6a0','#118ab2','#f4a261'];cv.width=W;cv.height=H;app.append(cv);const x=cv.getContext('2d');let best=0;try{best=+localStorage.getItem(key)||0}catch(e){}
 let L,px,pr,pyr,hp,cam,sc,st,cd=0,lt=0,ride,nb,sx=0,sy=0;
 const rr=(a,b,w,h,r)=>{x.beginPath();if(x.roundRect)x.roundRect(a,b,w,h,r);else x.rect(a,b,w,h)};
 const mk=(i,pv)=>{if(i<3)return{t:'g',tr:[]};const r=R(10);if(r<4||(pv=='w'&&r>=7))return{t:'g',tr:[...Array(CO).keys()].filter(()=>R(5)==0)};const dir=R(2)?1:-1;
-if(r<7){const n=1+R(3),v=dir*(1.2+Math.random()*2+Math.min(i/60,1.6));return{t:'r',v,cars:[...Array(n)].map((_,k)=>({x:k*W/n+R(50),w:T*(1.2+R(2)*.6),c:CC[R(5)]}))}}
-return{t:'w',v:dir*(.8+Math.random()*1.2),logs:[0,1,2].map(k=>({x:k*W/3+R(40),w:T*(2+R(2))}))}};
+if(r<7){const n=1+R(3),v=dir*(1.2+Math.random()*2+Math.min(i/60,1.6))*DF;return{t:'r',v,cars:[...Array(n)].map((_,k)=>({x:k*W/n+R(50),w:T*(1.2+R(2)*.6),c:CC[R(5)]}))}}
+return{t:'w',v:dir*(.8+Math.random()*1.2)*(o.d==2?1.2:1),logs:[0,1,2].map(k=>({x:k*W/3+R(40),w:T*(2+R(2))}))}};
 const reset=()=>{L=[];for(let i=0;i<VR+8;i++)L.push(mk(i,i?L[i-1].t:'g'));px=W/2;pr=0;pyr=0;hp=null;cam=0;sc=0;st=0;ride=null;nb=0},u=()=>s.innerHTML=`Reihen ${sc} · 🏆 ${best}`;reset();u();
 const die=()=>{if(st!=1)return;st=2;cd=Date.now()+500;if(sc>best){best=sc;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
 const hop=(dx,dy)=>{if(hp||st==2)return;if(st==0)st=1;const ty=pr+dy;if(ty<0||ty<Math.floor(cam))return;const tl=L[ty];let tx;
@@ -26,7 +26,7 @@ if(st==1){L.forEach(l=>{if(l.t=='r')l.cars.forEach(c=>{c.x+=l.v*d;if(l.v>0&&c.x>
 if(hp){hp.t=Math.min(1,hp.t+d*16.67/120);px=hp.x0+(hp.x1-hp.x0)*hp.t;pyr=hp.y0+(hp.y1-hp.y0)*hp.t;if(hp.t>=1){pr=hp.y1;pyr=pr;px=hp.x1;hp=null;if(pr>sc){sc=pr;u()}const l=L[pr];if(l.t=='w'){const g=l.logs.find(g=>px>=g.x&&px<=g.x+g.w);if(g)ride={g,o:px-g.x};else die()}}}
 else if(ride){px=ride.g.x+ride.o;if(px<0||px>W)die()}
 const l=L[Math.round(pyr)];if(l&&l.t=='r'&&Math.abs(pyr-Math.round(pyr))<.45)l.cars.forEach(c=>{if(px+13>c.x&&px-13<c.x+c.w)die()});
-const tg=Math.max(0,pr-3.4);cam+=Math.max(0,tg-cam)*.08*d+.0025*d*(1+sc/120);if(pyr<cam-.2)die();while(L.length<cam+VR+8)L.push(mk(L.length,L[L.length-1].t))}
+const tg=Math.max(0,pr-3.4);cam+=Math.max(0,tg-cam)*.08*d+.0025*DF*d*(1+sc/120);if(pyr<cam-.2)die();while(L.length<cam+VR+8)L.push(mk(L.length,L[L.length-1].t))}
 draw();raf=requestAnimationFrame(go)};raf=requestAnimationFrame(go)}
 
-registerGame({"id": "strassenhuepfer", "n": "Straßenhüpfer", "i": "🐔", "cat": "Action", "c": ["#22c55e", "#0ea5e9"], "fl": "nt", "pl": "1", "rules": "Tippen hüpft vorwärts, Wischen zur Seite oder zurück. Weiche Autos aus, nutze Baumstämme im Wasser und lass dich nicht vom Bildrand einholen.", "o": [],f:cr});
+registerGame({"id": "strassenhuepfer", "n": "Straßenhüpfer", "i": "🐔", "cat": "Action", "c": ["#22c55e", "#0ea5e9"], "fl": "nt", "pl": "1", "rules": "Tippen hüpft vorwärts, Wischen zur Seite oder zurück. Weiche Autos aus, nutze Baumstämme im Wasser und lass dich nicht vom Bildrand einholen.", "o": [["d", "Schwierigkeit", [["Leicht", 0], ["Mittel", 1], ["Schwer", 2]], 1]],f:cr});

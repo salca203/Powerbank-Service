@@ -1,5 +1,5 @@
 // Farbland
-function pio(o){const s=bar(()=>pio(o)),G=44,CS=11,W=G*CS,STEP=130,cv=$('canvas','hk'),key='pio',COL=['#ef476f','#118ab2','#ffd166','#2dc26b'],NB=o.b;cv.width=cv.height=W;app.append(cv);const x=cv.getContext('2d');
+function pio(o){const s=bar(()=>pio(o)),G=44,CS=11,W=G*CS,STEP=o.sp,cv=$('canvas','hk'),key='pio',COL=['#ef476f','#118ab2','#ffd166','#2dc26b'],NB=o.b;cv.width=cv.height=W;app.append(cv);const x=cv.getContext('2d');
 let ow,tr,P,st,kills,peak=0,best=0,lt=0,acc=0,cd=0,nb=0,sx=0,sy=0;try{best=+localStorage.getItem(key)||0}catch(e){}
 const pct=()=>{let n=0;for(let i=0;i<G*G;i++)if(ow[i]==0)n++;return Math.round(n*100/(G*G))},u=()=>s.innerHTML=`Land ${pct()}% · Besiegt ${kills} · 🏆 ${best}%`;
 const spawn=p=>{for(let t=0;t<300;t++){const cx=2+R(G-4),cy=2+R(G-4);let ok=1;for(let a=-2;a<=2;a++)for(let b=-2;b<=2;b++)if(ow[(cy+b)*G+cx+a]>=0||tr[(cy+b)*G+cx+a]>=0)ok=0;
@@ -27,4 +27,4 @@ if(st==2){x.fillStyle='#14213de6';x.fillRect(80,W/2-100,W-160,190);x.fillStyle='
 const go=now=>{const d=Math.min(60,now-(lt||now));lt=now;if(st==1){acc+=d;while(acc>=STEP){acc-=STEP;P.forEach(step);if(!P[0].alive){fin();break}const c=pct();if(c>peak)peak=c;u()}P.forEach(p=>{if(!p.alive&&p.id&&p.rt>0){p.rt-=d;if(p.rt<=0)spawn(p)}})}draw();raf=requestAnimationFrame(go)};
 raf=requestAnimationFrame(go)}
 
-registerGame({"id": "farbland", "n": "Farbland", "i": "🟥", "cat": "Action", "c": ["#f43f5e", "#f59e0b"], "fl": "nt", "pl": "1", "rules": "Wische oder nutze die Pfeiltasten. Zieh eine Spur und kehre zu deinem Land zurück, um die Fläche zu erobern. Wer auf eine Spur trifft, verliert: Schütze deine eigene und kreuze fremde.", "o": [["b", "Gegner", [["2 Gegner", 2], ["3 Gegner", 3]]]],f:pio});
+registerGame({"id": "farbland", "n": "Farbland", "i": "🟥", "cat": "Action", "c": ["#f43f5e", "#f59e0b"], "fl": "nt", "pl": "1", "rules": "Wische oder nutze die Pfeiltasten. Zieh eine Spur und kehre zu deinem Land zurück, um die Fläche zu erobern. Wer auf eine Spur trifft, verliert: Schütze deine eigene und kreuze fremde.", "o": [["b", "Gegner", [["2 Gegner", 2], ["3 Gegner", 3], ["4 Gegner", 4]]], ["sp", "Tempo", [["Gemütlich", 165], ["Normal", 130], ["Schnell", 100]], 1]],f:pio});

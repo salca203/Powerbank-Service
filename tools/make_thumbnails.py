@@ -64,7 +64,7 @@ def run():
         def tau():
             for i in range(7):pg.locator('.zone').nth(1 if i%3 else 0).click();w(40)
         def hockey():
-            pg.mouse.move(*at(200,600));w(300);pg.mouse.move(*at(120,560),steps=6);w(900)
+            pg.mouse.move(*at(90,200,700,400));w(300);pg.mouse.move(*at(230,150,700,400),steps=6);w(900)
         def flatter():
             for _ in range(4):pg.mouse.click(*at(200,350));w(380)
         def bubble():

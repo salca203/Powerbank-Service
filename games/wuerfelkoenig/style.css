@@ -1,9 +1,0 @@
-.kn{display:flex;gap:28px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
-.kd{display:flex;flex-direction:column;gap:12px;align-items:center}
-.dice{display:flex;gap:6px}
-.dc{font-size:min(13vw,78px);background:var(--card);border-radius:14px;padding:0 4px;line-height:1.15}
-.dc.h{background:var(--y);color:#14213d}
-.kt{border-collapse:collapse}
-.kt td,.kt th{padding:6px 14px;border-bottom:1px solid var(--line);text-align:center}
-.kt td:first-child{text-align:left}
-.pk{background:var(--y);color:#14213d;cursor:pointer}

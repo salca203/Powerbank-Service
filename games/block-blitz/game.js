@@ -1,9 +1,9 @@
 // Block-Blitz
-function blk(o){const s=bar(()=>blk(o)),W=400,H=560,C=46,GX=16,GY=16,cv=$('canvas','hk'),PAL=['#ef476f','#118ab2','#2dc26b','#ffd166','#5ad8e6','#b44fd8','#f97316'],key='bk',
+function blk(o){const s=bar(()=>blk(o)),W=400,H=560,C=46,GX=16,GY=16,cv=$('canvas','hk'),PAL=['#ef476f','#118ab2','#2dc26b','#ffd166','#5ad8e6','#b44fd8','#f97316'],key='bk'+o.d,
 SH='1 11 1/1 111 1/1/1 1111 1/1/1/1 11/11 111/111/111 10/11 11/10 01/11 11/01 100/100/111 111/100/100 011/110 110/011'.split(' ').map(p=>{const a=[];p.split('/').forEach((r,i)=>[...r].forEach((c,j)=>{if(c=='1')a.push([i,j])}));return a});
 cv.width=W;cv.height=H;app.append(cv);const x=cv.getContext('2d');let best=0;try{best=+localStorage.getItem(key)||0}catch(e){}
 let g=Array.from({length:8},()=>Array(8).fill(-1)),ps=[],dr=null,sc=0,over=0;
-const fresh=()=>{ps=[0,1,2].map(()=>({a:SH[R(SH.length)],c:R(7),u:0}))},dim=a=>[Math.max(...a.map(p=>p[0]))+1,Math.max(...a.map(p=>p[1]))+1];
+const fresh=()=>{ps=[0,1,2].map(()=>{const pool=SH.filter(a=>o.d==0?a.length<=4:true);let a=pool[R(pool.length)];if(o.d==2){const b=pool[R(pool.length)];if(b.length>a.length)a=b}return{a,c:R(7),u:0}})},dim=a=>[Math.max(...a.map(p=>p[0]))+1,Math.max(...a.map(p=>p[1]))+1];
 const fits=(a,r,c)=>a.every(([i,j])=>r+i>=0&&r+i<8&&c+j>=0&&c+j<8&&g[r+i][c+j]<0),any=()=>ps.some(p=>!p.u&&g.some((row,r)=>row.some((_,c)=>fits(p.a,r,c)))),u=()=>s.innerHTML=`Punkte ${sc} · 🏆 ${best}`;fresh();u();
 const place=(p,r,c)=>{p.a.forEach(([i,j])=>g[r+i][c+j]=p.c);p.u=1;sc+=p.a.length;const rs=[],cs=[];for(let i=0;i<8;i++){if(g[i].every(v=>v>=0))rs.push(i);if(g.every(row=>row[i]>=0))cs.push(i)}rs.forEach(i=>g[i].fill(-1));cs.forEach(j=>g.forEach(row=>row[j]=-1));const n=rs.length+cs.length;sc+=n*n*10;
 if(ps.every(q=>q.u))fresh();if(!any()){over=1;if(sc>best){best=sc;try{localStorage.setItem(key,best)}catch(e){}}}u()};
@@ -18,4 +18,4 @@ if(dr){const p=ps[dr.i],[h,w]=dim(p.a);p.a.forEach(([i,j])=>cell(dr.x-w*C/2+j*C,
 if(over){x.fillStyle='#000b';x.fillRect(0,0,W,H);x.fillStyle='#fff';x.textAlign='center';x.font='800 34px ui-rounded,system-ui,sans-serif';x.fillText('Keine Züge mehr',W/2,230);x.font='700 26px ui-rounded,system-ui,sans-serif';x.fillText(`Punkte ${sc}`,W/2,280);x.fillText(`Bestwert ${best}`,W/2,320);x.font='600 18px ui-rounded,system-ui,sans-serif';x.fillText('Tippen für neues Spiel',W/2,370)}};
 const go=()=>{draw();raf=requestAnimationFrame(go)};go()}
 
-registerGame({"id": "block-blitz", "n": "Block-Blitz", "i": "🧱", "cat": "Puzzle", "c": ["#7c3aed", "#2563eb"], "fl": "nt", "pl": "1", "rules": "Ziehe die Blöcke aufs Feld. Volle Reihen und Spalten verschwinden. Wenn nichts mehr passt, ist Schluss.", "o": [],f:blk});
+registerGame({"id": "block-blitz", "n": "Block-Blitz", "i": "🧱", "cat": "Puzzle", "c": ["#7c3aed", "#2563eb"], "fl": "nt", "pl": "1", "rules": "Ziehe die Blöcke aufs Feld. Volle Reihen und Spalten verschwinden. Wenn nichts mehr passt, ist Schluss.", "o": [["d", "Schwierigkeit", [["Leicht · kleine Blöcke", 0], ["Mittel", 1], ["Schwer · große Blöcke", 2]], 1]],f:blk});
