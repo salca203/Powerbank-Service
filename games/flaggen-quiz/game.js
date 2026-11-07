@@ -1,7 +1,12 @@
-// Flaggen-Quiz
-function quiz(o){const s=bar(()=>quiz(o)),N=10,q=shuf(FL).slice(0,N),f=$('div','flag'),ch=$('div','ch');let r=0,sc=[0,0];app.append(f,ch);
-const next=()=>{if(r==N){f.textContent='🏁';ch.innerHTML='';const w=+(sc[1]>sc[0]);s.innerHTML=o.m==1?`Ergebnis: ${sc[0]} von ${N}`:(sc[0]==sc[1]?'Unentschieden':dot(w)+names[w]+' gewinnt!')+` (${sc[0]}:${sc[1]})`;return}
-const cur=o.m==2?r%2:0,c=q[r];f.textContent=fl(c[0]);s.innerHTML=`Frage ${r+1}/${N} · ${o.m==2?dot(cur)+names[cur]+' · ':''}${sc[0]}${o.m==2?':'+sc[1]:''}`;ch.innerHTML='';
-shuf([c,...shuf(FL.filter(x=>x!=c)).slice(0,3)]).forEach(a=>{const b=$('button','opt',a[1]);b.onclick=()=>{[...ch.children].forEach(x=>x.disabled=1);if(a==c){sc[cur]++;b.classList.add('good')}else{b.classList.add('bad');[...ch.children].find(x=>x.textContent==c[1]).classList.add('good')}r++;later(next,1100)};ch.append(b)})};next()}
+// Flaggen-Quiz: 4 Schwierigkeitsstufen, zwei Frage-Arten, Zeitlimit
+function quiz(o){const N=o.n,s=bar(()=>quiz(o)),pool=FL.filter(c=>[[0],[0,1],[0,1,2],[1,2]][o.d].includes(c[2])),K=[3,4,6,6][o.d],TL=[0,0,12,7][o.d],key='fq'+o.d+N+o.r,q=shuf(pool).slice(0,N),w=$('div','qz'),tb=$('div','tbar','<i></i>'),f=$('div','flag'),ch=$('div','ch'+(K==3?' k3':'')+(o.r?' fg':''));
+let r=0,sc=[0,0],best=0,qid=0;try{best=+localStorage.getItem(key)||0}catch(e){}tb.style.visibility=TL?'visible':'hidden';w.append(tb,f,ch);app.append(w);
+const next=()=>{const id=++qid;
+if(r==N){f.textContent='🏁';f.className='flag';ch.innerHTML='';tb.style.visibility='hidden';let m;if(o.m==1){m=`Ergebnis: ${sc[0]} von ${N}`;if(sc[0]>best){best=sc[0];try{localStorage.setItem(key,best)}catch(e){}m+=' · neuer Bestwert! 🏆'}else m+=` · 🏆 ${best}`}else{const wn=+(sc[1]>sc[0]);m=(sc[0]==sc[1]?'Unentschieden':dot(wn)+names[wn]+' gewinnt!')+` (${sc[0]}:${sc[1]})`}s.innerHTML=m;return}
+const cur=o.m==2?r%2:0,c=q[r];f.textContent=o.r?c[1]:fl(c[0]);f.className='flag'+(o.r?' nm':'');
+s.innerHTML=`Frage ${r+1}/${N} · ${o.m==2?dot(cur)+names[cur]+' · ':''}${sc[0]}${o.m==2?':'+sc[1]:''}${o.m==1&&best?' · 🏆 '+best:''}`;ch.innerHTML='';
+const opts=shuf([c,...shuf(pool.filter(x=>x!=c)).slice(0,K-1)]),bs=opts.map(a=>{const b=$('button','opt',o.r?fl(a[0]):a[1]);b.onclick=()=>ans(b,a===c);ch.append(b);return b});
+const fin=(b,ok)=>{if(id!=qid)return;qid++;bs.forEach(x=>x.disabled=1);if(ok){sc[cur]++;b.classList.add('good')}else{if(b)b.classList.add('bad');bs[opts.indexOf(c)].classList.add('good')}r++;later(next,ok?900:1500)},ans=(b,ok)=>fin(b,ok);
+if(TL){let left=TL;const tk=()=>{if(id!=qid)return;left-=.1;tb.firstChild.style.width=Math.max(0,left/TL*100)+'%';if(left<=0)fin(null,false);else later(tk,100)};tb.firstChild.style.width='100%';later(tk,100)}};next()}
 
-registerGame({"id": "flaggen-quiz", "n": "Flaggen-Quiz", "i": "🏳️", "cat": "Wörter & Quiz", "c": ["#0ea5e9", "#16a34a"], "fl": "t", "pl": "1–2", "rules": "10 Flaggen, vier Antworten. Zu zweit wechselt ihr euch ab.", "o": [["m", "Spieler", [["Allein", 1], ["Zu zweit", 2]]]], "css": true,f:quiz});
+registerGame({"id": "flaggen-quiz", "n": "Flaggen-Quiz", "i": "🏳️", "cat": "Wörter & Quiz", "c": ["#0ea5e9", "#16a34a"], "fl": "t", "pl": "1–2", "rules": "Erkenne die Flaggen der Welt. Vier Stufen von „bekannte Länder“ bis „Experte mit Zeitlimit“. Zu zweit wechselt ihr euch ab.", "o": [["m", "Spieler", [["Allein", 1], ["Zu zweit", 2]]], ["d", "Schwierigkeit", [["Leicht · bekannte Länder, 3 Antworten", 0], ["Mittel · 4 Antworten", 1], ["Schwer · alle Länder, 6 Antworten, 12 s", 2], ["Experte · seltene Länder, 7 s", 3]], 1], ["r", "Frageart", [["Flagge → Land", 0], ["Land → Flagge", 1]]], ["n", "Fragen", [["10", 10], ["20", 20], ["30", 30]]]], "css": true,f:quiz});

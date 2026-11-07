@@ -1,6 +1,6 @@
 .wg{display:grid;gap:6px;margin:10px 0}
 .wr{display:flex;gap:6px;justify-content:center}
-.wc{width:min(14vw,58px);height:min(14vw,58px);display:grid;place-items:center;border:2px solid var(--line);border-radius:8px;font-size:26px;font-weight:900}
+.wc{width:min(12vw,min(58px,calc((100dvh - 290px)/var(--rows,6))));height:min(12vw,min(58px,calc((100dvh - 290px)/var(--rows,6))));display:grid;place-items:center;border:2px solid var(--line);border-radius:8px;font-size:26px;font-weight:900}
 .wc.g,.wkb.g{background:#22a55b;border-color:#22a55b;color:#fff}
 .wc.y,.wkb.y{background:#c99a14;border-color:#c99a14;color:#fff}
 .wc.a,.wkb.a{background:#3b3558;border-color:#3b3558}

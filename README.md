@@ -16,7 +16,8 @@ css/
   legal.css             Stile der Rechtstexte
 js/
   core.js               Hilfsfunktionen, Spiele-Register (registerGame)
-  flags.js              Geteilte Daten: Länderliste (Flaggen-Quiz, Paare finden)
+  flags.js              Geteilte Daten: Länderliste mit Schwierigkeitsstufe (Flaggen-Quiz, Paare finden)
+  help.js               Anleitungen aller Spiele (Ziel, Schritte, Steuerung, Tipps)
   shell.js              Oberfläche: Startseite, Suche, Profil, Favoriten, Feedback
   main.js               Lädt alle Spiele und startet die Startseite
 games/
@@ -39,12 +40,19 @@ tools/
      fl:'n', pl:'1', rules:'Kurze Anleitung.', o:[], f:meinSpiel});
    ```
    `cat`: Brettspiele, Puzzle, Wörter & Quiz oder Action. `fl`: `n` = NEU, `t` = Empfohlen. `pl`: `1`, `1–2` oder `2`.
-   Optionen (`o`) erscheinen vor dem Start, z. B. `['n','Größe',[['5×5',5],['7×7',7]]]`.
+   Optionen (`o`) erscheinen vor dem Start, z. B. `['n','Größe',[['5×5',5],['7×7',7]]]`. Ein vierter Eintrag wählt die vorausgewählte Stufe, z. B. `['d','Schwierigkeit',[['Leicht',0],['Mittel',1],['Schwer',2]],1]` (Mittel).
    Eigene Stile: `style.css` anlegen und `css:true` in `registerGame` setzen.
 3. ID in `games/games.js` eintragen.
+   Anleitung in `js/help.js` ergänzen (Schlüssel = Spielname): `z` Ziel, `s` Schritte, `k` Steuerung, `r` Besonderheiten, `t` Tipp.
 4. Vorschaubild erzeugen: `python tools/make_thumbnails.py` (dafür muss das Spiel in dem Skript einmal
    „vorgespielt“ werden) oder einfach eine eigene `thumb.webp` (400×250) in den Ordner legen.
    Fehlt das Bild, zeigt die Seite automatisch ein Ersatzbild.
+
+## Hinweise zur Darstellung
+
+* Ausgelegt auf das iPad im Querformat. Im Spiel verschwinden Kopfzeile und Seitenleiste, damit das Spiel den ganzen Bildschirm nutzt.
+* Canvas-Spiele zeichnen in ihren festen Koordinaten, `js/core.js` rechnet sie automatisch auf die echte Bildschirmauflösung hoch (scharfe Darstellung).
+* Zwei-Spieler-Spiele mit getrennten Seiten (Air Hockey, Tap-Duell, Tauziehen) teilen den Bildschirm links/rechts.
 
 ## Lokal ansehen
 

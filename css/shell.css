@@ -71,3 +71,18 @@ footer a{color:inherit}
 @keyframes fadein{from{opacity:0;transform:translateY(8px)}}
 .gc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .gg.row{grid-template-rows:auto;grid-auto-rows:0;row-gap:0;overflow:hidden;padding:8px 8px 0;margin:-8px -8px 0}.gg.row .gc{margin-bottom:8px}
+/* Spielmodus: Kopfzeile und Seitenleiste weg, damit das Spiel den ganzen iPad-Bildschirm nutzt */
+body.play #top,body.play #side,body.play footer{display:none}
+body.play #main{padding:0 max(14px,env(safe-area-inset-right)) 0 max(14px,env(safe-area-inset-left))}
+body.play .bar{margin:max(8px,env(safe-area-inset-top)) 0 8px}
+/* Startseite eines Spiels: Optionen links, Anleitung rechts */
+.su{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 28px;align-items:start}
+@media(max-width:860px){.su{grid-template-columns:1fr}}
+.hb{background:var(--card);border-radius:18px;padding:16px 20px;line-height:1.55;font-weight:500;font-size:17px}
+.hb h2{margin:0 0 8px;font-size:20px}
+.hb h3{margin:14px 0 4px;font-size:15px;letter-spacing:.04em;text-transform:uppercase;opacity:.6}
+.hb p{margin:4px 0}.hb ol,.hb ul{margin:4px 0;padding-left:22px}.hb li{margin:3px 0}
+.hb .tip{background:#33295f;border-radius:12px;padding:8px 12px;margin-top:12px}
+.mbx .hb{padding:0;background:none}
+.seg small{display:block;opacity:.6;font-weight:500;margin-top:4px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}

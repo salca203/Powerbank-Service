@@ -1,4 +1,0 @@
-.mn{display:grid;grid-template-columns:1.2fr repeat(6,1fr) 1.2fr;gap:8px}
-.pit{aspect-ratio:1;border-radius:50%;background:var(--card);font-size:26px;padding:0}
-.sto{border-radius:40px;background:var(--card);font-size:34px}
-.pit:disabled{color:var(--fg)}

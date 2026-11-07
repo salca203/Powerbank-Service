@@ -12,10 +12,17 @@ const mk=m=>{if(bz)return;bz=1;const q=g.children,f=q[m[0]],e=q[m[1]],gr=g.getBo
 d.style.cssText=`position:absolute;left:${a.left-gr.left}px;top:${a.top-gr.top}px;width:${a.width}px;height:${a.height}px;background:none;color:${f.style.color};text-shadow:${f.style.textShadow};z-index:3;pointer-events:none;transform:${rt?'rotate(180deg)':'none'}`;
 g.append(d);f.textContent='';d.getBoundingClientRect();d.style.transition='transform .3s ease';d.style.transform=`translate(${z.left-a.left}px,${z.top-a.top}px)${rt}`;
 later(()=>{bz=0;b=ap(b,m);sel=null;cur=1-cur;if(!legal(b,cur==0).length)over=chk(b,cur==0)?(cur==0?2:1):3;draw();if(!over&&o.m==1&&cur==1)later(ai,200)},320)};
-const ai=()=>{let best=-1e9,bm;for(const m of legal(b,false)){const x=ap(b,m),r=legal(x,true);let v=r.length?Math.min(...r.map(t=>ev(ap(x,t)))):chk(x,true)?1e4:0;v+=Math.random()*.4;if(v>best){best=v;bm=m}}if(bm)mk(bm)};
+const PB=(p,i)=>{const t=p.toLowerCase(),x=i%8,y=i>>3,cx=3.5-Math.abs(x-3.5),cy=3.5-Math.abs(y-3.5),c=(cx+cy)*.04;if(t=='n'||t=='b')return c*2;if(t=='p'){const adv=own(p,true)?6-y:y-1;return adv*.04+c*.5}return t=='q'?c*.3:0};
+const evb=b=>b.reduce((a,p,i)=>a+(p=='.'?0:(own(p,true)?-1:1)*(V[p.toLowerCase()]+PB(p,i))),0);
+const nm=(b,w,dp,al,be)=>{if(!dp)return w?-evb(b):evb(b);const m=gen(b,w).sort((x,y)=>(b[y[1]]!='.')-(b[x[1]]!='.'));if(!m.length)return 0;let best=-1e9;for(const mv of m){const t=b[mv[1]];let v;if(t=='k'||t=='K')v=1e5+dp;else v=-nm(ap(b,mv),!w,dp-1,-be,-al);if(v>best)best=v;if(v>al)al=v;if(al>=be)break}return best};
+const ai=()=>{const d=o.d??1,L=legal(b,false);if(!L.length)return;let bm=L[0];
+if(d==0){const cp=L.filter(m=>b[m[1]]!='.');bm=cp.length&&R(100)<50?cp.sort((p,q)=>V[b[q[1]].toLowerCase()]-V[b[p[1]].toLowerCase()])[0]:L[R(L.length)]}
+else if(d==1){let best=-1e9;for(const m of L){const x=ap(b,m),r=legal(x,true);let v=r.length?Math.min(...r.map(t=>ev(ap(x,t)))):chk(x,true)?1e4:0;v+=Math.random()*.4;if(v>best){best=v;bm=m}}}
+else{let best=-1e9;shuf(L).forEach(m=>{const x=ap(b,m);let v=-nm(x,true,3,-1e9,1e9)+Math.random()*.05;if(legal(x,true).length==0)v=chk(x,true)?1e6:0;if(v>best){best=v;bm=m}})}
+mk(bm)};
 const tap=i=>{if(over||bz||(o.m==1&&cur==1))return;if(sel!=null&&legal(b,cur==0).some(m=>m[0]==sel&&m[1]==i))return mk([sel,i]);sel=own(b[i],cur==0)?i:null;draw()};
 const draw=()=>{g.innerHTML='';const T=sel!=null?legal(b,cur==0).filter(m=>m[0]==sel).map(m=>m[1]):[];b.forEach((p,i)=>{const e=$('button','sq'+((i+(i>>3))%2?' dk':'')+(sel==i?' sl':'')+(T.includes(i)?' tg':''),p=='.'?'':'♚♛♜♝♞♟'['kqrbnp'.indexOf(p.toLowerCase())]+'\uFE0E');
-e.style.color=own(p,true)?'#fff':'#111';if(own(p,true))e.style.textShadow='0 0 3px #000,0 0 3px #000';if(own(p,false)&&o.m==2)e.style.transform='rotate(180deg)';e.onclick=()=>tap(i);g.append(e)});
+e.style.color=own(p,true)?'#fff':'#111';if(own(p,true))e.style.textShadow='0 0 3px #000,0 0 3px #000';if(own(p,false)&&o.m==2&&o.sit)e.style.transform='rotate(180deg)';e.onclick=()=>tap(i);g.append(e)});
 s.innerHTML=over?(over==3?'Patt – Unentschieden':dot(+(over==2))+names[+(over==2)]+' gewinnt durch Schachmatt! 🏆'):`${dot(cur)}${names[cur]}${chk(b,cur==0)?' · Schach!':''}`};draw()}
 
-registerGame({"id": "schach", "n": "Schach", "i": "♟️", "cat": "Brettspiele", "c": ["#1d4ed8", "#7e22ce"], "fl": "t", "pl": "1–2", "rules": "Wer den gegnerischen König mattsetzt, gewinnt. Figur antippen, dann Zielfeld. Ohne Rochade und En passant.", "o": [["m", "Gegner", [["Computer", 1], ["Zu zweit", 2]]]], "css": true,f:chess});
+registerGame({"id": "schach", "n": "Schach", "i": "♟️", "cat": "Brettspiele", "c": ["#1d4ed8", "#7e22ce"], "fl": "t", "pl": "1–2", "rules": "Wer den gegnerischen König mattsetzt, gewinnt. Figur antippen, dann Zielfeld. Ohne Rochade und En passant, Bauern werden zur Dame.", "o": [["m", "Gegner", [["Computer", 1], ["Zu zweit", 2]]], ["d", "Computer-Stärke", [["Leicht", 0], ["Mittel", 1], ["Schwer", 2]], 1], ["sit", "Sitzposition (zu zweit)", [["Nebeneinander", 0], ["Gegenüber (schwarze Figuren gedreht)", 1]]]], "css": true,f:chess});

@@ -3,9 +3,11 @@
 const $=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
 const app=document.getElementById('app'),R=n=>Math.floor(Math.random()*n),shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
 const dot=i=>`<i class="dot" style="background:var(--p${i})"></i>`;
-let tm=[],raf=0,names=['Spieler 1','Spieler 2'];
+let tm=[],raf=0,names=['Spieler 1','Spieler 2'],CURG=null;
+// Scharfe Darstellung: Canvas wird mit der echten Bildschirmauflösung (bis 3x) gezeichnet, die Spiele rechnen weiter in ihren festen Koordinaten.
+(function(){const g=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(t,a){const c=g.call(this,t,a);if(t==='2d'&&c&&!this._hd){this._hd=1;const k=Math.min(3,Math.max(1.5,window.devicePixelRatio||1)),w=this.width,h=this.height;this.width=Math.round(w*k);this.height=Math.round(h*k);this.style.setProperty('--ar',w/h);this.style.aspectRatio=w+' / '+h;c.setTransform(k,0,0,k,0,0)}return c}})();
 const later=(f,ms)=>tm.push(setTimeout(f,ms)),clear=()=>{tm.forEach(clearTimeout);tm=[];cancelAnimationFrame(raf);onresize=onkeydown=onkeyup=null;app.innerHTML=''};
-function bar(r){const d=$('div','bar'),b=$('button','sm','← Menü'),s=$('div','st');b.onclick=menu;d.append(b,s);if(r){const n=$('button','sm','↻');n.onclick=()=>{clear();r()};d.append(n)}app.append(d);return s}
+function bar(r){const d=$('div','bar'),b=$('button','sm','← Menü'),s=$('div','st');b.onclick=menu;d.append(b,s);if(r){const n=$('button','sm','↻');n.title='Neu starten';n.onclick=()=>{clear();r()};d.append(n)}const q=$('button','sm','?');q.title='Anleitung';q.setAttribute('aria-label','Anleitung');q.onclick=()=>helpModal(CURG);d.append(q);app.append(d);return s}
 
 // ---- Spiele-Register: jedes Spiel meldet sich in games/<ordner>/game.js hier an
 const GAMES=[],META={},RULES={};
