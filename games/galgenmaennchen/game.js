@@ -1,0 +1,10 @@
+// Galgenmännchen
+function hang(o){const s=bar(()=>hang(o)),box=$('div'),WD="SCHMETTERLING,FERNSEHER,KÄSEKUCHEN,BIBLIOTHEK,GEWITTER,ELEFANT,SCHOKOLADE,FAHRRAD,LEUCHTTURM,KÜHLSCHRANK,STRANDKORB,ZAUBERER,REGENBOGEN,TASCHENLAMPE,HUBSCHRAUBER,PFANNKUCHEN,ABENTEUER,KAPITÄN,WASSERMELONE,SPAZIERGANG,FUSSBALL,GEBURTSTAG,TRAMPOLIN,SONNENBRILLE,KROKODIL,MARMELADE,RAUMSCHIFF,SCHNEEMANN,WINDMÜHLE,DINOSAURIER".split(','),
+SV=['<path d="M10 190h80M30 190V10"/>','<path d="M30 10h80v25"/>','<circle cx="110" cy="52" r="17"/>','<path d="M110 69v55"/>','<path d="M110 80l-26 28"/>','<path d="M110 80l26 28"/>','<path d="M110 124l-24 40"/>','<path d="M110 124l24 40"/>'];app.append(box);
+const play=w=>{box.innerHTML='';const g=new Set(),hm=$('div','hm'),f=$('div'),wd=$('div','wd'),kb=$('div','kb');let m=0;hm.append(f,wd);box.append(hm,kb);
+const draw=()=>{f.innerHTML=`<svg viewBox="0 0 160 200" width="170" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round">${SV.slice(0,m).join('')}</svg>`;wd.textContent=[...w].map(c=>g.has(c)?c:'_').join(' ');const won=[...w].every(c=>g.has(c));
+s.textContent=won?'🎉 Gelöst!':m>=8?'Verloren – '+w:`Fehler: ${m}/8`;kb.querySelectorAll('button').forEach(b=>b.disabled=g.has(b.textContent)||won||m>=8)};
+[...'ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÜ'].forEach(c=>{const b=$('button',0,c);b.onclick=()=>{g.add(c);if(!w.includes(c))m++;draw()};kb.append(b)});draw()};
+if(o.m==1)play(WD[R(WD.length)]);else{s.textContent=names[0]+': Wort eingeben, Spieler 2 schaut weg';const i=$('input'),b=$('button','start','Los');i.type='password';i.placeholder='Geheimes Wort';b.onclick=()=>{const w=i.value.toUpperCase().replace(/[^A-ZÄÖÜ]/g,'');if(w.length>1)play(w)};box.append(i,b)}}
+
+registerGame({"id": "galgenmaennchen", "n": "Galgenmännchen", "i": "🔤", "cat": "Wörter & Quiz", "c": ["#475569", "#0f766e"], "fl": "", "pl": "1–2", "rules": "Rate das Wort Buchstabe für Buchstabe. Nach 8 Fehlern ist das Spiel verloren.", "o": [["m", "Spieler", [["Allein", 1], ["Zu zweit", 2]]]], "css": true,f:hang});
