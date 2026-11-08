@@ -9,4 +9,4 @@
 .tbar i{display:block;height:100%;width:100%;background:var(--y);transition:width .1s linear}
 .good{background:#2a9d5c!important;color:#fff}
 .bad{background:var(--p0)!important;color:#fff}
-@media(min-aspect-ratio:11/10){.qz{grid-template-columns:1fr 1fr;align-items:center;min-height:calc(100dvh - 130px)}.tbar{grid-column:1/-1;align-self:start}.flag{font-size:min(22vw,34vh,230px)}.flag.nm{font-size:min(5vw,48px)}}
+@media(min-aspect-ratio:11/10){.qz{grid-template-columns:1fr 1fr;align-items:center;min-height:calc(var(--dvh,100vh) - 130px)}.tbar{grid-column:1/-1;align-self:start}.flag{font-size:min(22vw,34vh,230px)}.flag.nm{font-size:min(5vw,48px)}}

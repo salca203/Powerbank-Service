@@ -1,5 +1,5 @@
 // Mancala
-function mnc(o){const s=bar(()=>mnc(o)),g=$('div','mn');let b=[4,4,4,4,4,4,0,4,4,4,4,4,4,0],cur=0,over=0;app.append(g);
+function mnc(o){const s=bar(()=>mnc(o),'.mn'),g=$('div','mn');let b=[4,4,4,4,4,4,0,4,4,4,4,4,4,0],cur=0,over=0;app.append(g);
 const draw=()=>{g.innerHTML='';const add=(i,a,cl)=>{const e=$('button',cl,b[i]);e.style.gridArea=a;if(cl=='pit'){const m=!over&&(cur?i>6:i<6)&&b[i]&&!(o.m==1&&cur==1);e.disabled=!m;if(m)e.style.outline=`3px solid var(--p${cur})`;e.onclick=()=>sow(i)}else e.style.color=`var(--p${i==6?0:1})`;g.append(e)};
 add(13,'1/1/3/2','sto');for(let i=0;i<6;i++){add(12-i,`1/${i+2}`,'pit');add(i,`2/${i+2}`,'pit')}add(6,'1/8/3/9','sto');
 s.innerHTML=over?(b[6]==b[13]?'Unentschieden':dot(+(b[13]>b[6]))+names[+(b[13]>b[6])]+' gewinnt! 🏆'):`${dot(cur)}${names[cur]} · ${cur?'obere':'untere'} Reihe`};

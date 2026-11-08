@@ -1,5 +1,5 @@
 // Mühle
-function mu(o){const s=bar(()=>mu(o)),NS='http://www.w3.org/2000/svg',g=document.createElementNS(NS,'svg');g.setAttribute('viewBox','-.5 -.5 7 7');g.setAttribute('class','mu');app.append(g);
+function mu(o){const s=bar(()=>mu(o),'.mu'),NS='http://www.w3.org/2000/svg',g=document.createElementNS(NS,'svg');g.setAttribute('viewBox','-.5 -.5 7 7');g.setAttribute('class','mu');app.append(g);
 const P=[],M=[];for(let r=0;r<3;r++){const a=r,b=3,c=6-r;P.push([a,a],[b,a],[c,a],[c,b],[c,c],[b,c],[a,c],[a,b]);for(let i=0;i<8;i+=2)M.push([r*8+i,r*8+(i+1)%8,r*8+(i+2)%8])}for(let i=1;i<8;i+=2)M.push([i,i+8,i+16]);
 const nb=i=>{const r=i>>3,j=i&7,a=[r*8+(j+1)%8,r*8+(j+7)%8];if(j%2){if(r)a.push(i-8);if(r<2)a.push(i+8)}return a};let b=Array(24).fill(null),hand=[9,9],cur=0,sel=null,rem=0,over=-1;
 const cnt=p=>b.filter(v=>v===p).length+hand[p],mill=(i,p)=>M.some(l=>l.includes(i)&&l.every(x=>b[x]===p)),fly=p=>!hand[p]&&cnt(p)==3,

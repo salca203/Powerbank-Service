@@ -1,5 +1,5 @@
 // Kästchen
-function dots(o){const s=bar(()=>dots(o)),n=o.n,N=2*o.n+1,g=$('div','dg'),E={},ln={};let cur=0,sc=[0,0],tot=0;
+function dots(o){const s=bar(()=>dots(o),'.dg'),n=o.n,N=2*o.n+1,g=$('div','dg'),E={},ln={};let cur=0,sc=[0,0],tot=0;
 g.style.cssText=`grid-template-columns:repeat(${n},18px 1fr) 18px;grid-template-rows:repeat(${n},18px 1fr) 18px;aspect-ratio:1`;
 const adj=(y,x)=>(y%2?[[y,x-1],[y,x+1]]:[[y-1,x],[y+1,x]]).filter(([a,b])=>a>0&&b>0&&a<N&&b<N),sd=(a,b)=>[[-1,0],[1,0],[0,-1],[0,1]].filter(([p,q])=>ln[(a+p)+','+(b+q)]!=null).length;
 const u=()=>s.innerHTML=`${dot(cur)}${names[cur]} · ${sc[0]} : ${sc[1]}`;

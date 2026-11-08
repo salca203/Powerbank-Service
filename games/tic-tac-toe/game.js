@@ -1,5 +1,5 @@
 // Tic-Tac-Toe
-function ttt(o){const s=bar(()=>ttt(o)),g=$('div','tt'),nx=$('button','start','Nächste Runde'),L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];let b,cur,over,sc=[0,0],first=1;app.append(g,nx);
+function ttt(o){const s=bar(()=>ttt(o),'.tt'),g=$('div','tt'),nx=$('button','start','Nächste Runde'),L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];let b,cur,over,sc=[0,0],first=1;app.append(g,nx);
 const win=a=>L.find(l=>a[l[0]]!=null&&a[l[0]]==a[l[1]]&&a[l[1]]==a[l[2]])||0;
 const u=()=>s.innerHTML=`${dot(0)}${sc[0]} : ${sc[1]}${dot(1)} · `+(over==1?`${dot(cur)}${names[cur]} gewinnt! 🏆`:over==2?'Unentschieden':`${dot(cur)}${names[cur]} ist dran`);
 const draw=()=>{g.innerHTML='';const w=win(b);b.forEach((v,i)=>{const c=$('button','tc'+(w&&w.includes(i)?' win':''),v==null?'':'✕○'[v]);c.style.color=`var(--p${v})`;c.onclick=()=>{if(!over&&b[i]==null&&!(o.m==1&&cur==1))mv(i)};g.append(c)});nx.hidden=!over};
