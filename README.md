@@ -27,7 +27,8 @@ games/
     style.css           Nur falls das Spiel eigene Stile braucht
     thumb.webp          Vorschaubild (echter Screenshot aus dem Spiel)
 tools/
-  make_thumbnails.py    Erzeugt alle Vorschaubilder neu
+  make_thumbnails.py    Erzeugt Vorschaubilder aus echten Spielszenen (Screenshots)
+  thumbs-svg/           Vektor-Vorlagen der gezeichneten Vorschaubilder (Quelle der thumb.webp)
 ```
 
 ## Neues Spiel hinzufügen
@@ -53,6 +54,10 @@ tools/
 * Ausgelegt auf das iPad im Querformat. Im Spiel verschwinden Kopfzeile und Seitenleiste, damit das Spiel den ganzen Bildschirm nutzt.
 * Canvas-Spiele zeichnen in ihren festen Koordinaten, `js/core.js` rechnet sie automatisch auf die echte Bildschirmauflösung hoch (scharfe Darstellung).
 * Zwei-Spieler-Spiele mit getrennten Seiten (Air Hockey, Tap-Duell, Tauziehen) teilen den Bildschirm links/rechts.
+
+## Update-Hinweis (Browser-Cache)
+
+Nach jedem Update in `games/games.js` die Konstante `VER` erhöhen und die `?v=`-Nummern in `index.html` anpassen, sonst zeigen Browser (vor allem Safari auf dem iPad) manchmal noch alte Dateien. Auf dem iPad hilft zusätzlich: Seite neu laden oder Website-Daten für die Seite löschen.
 
 ## Lokal ansehen
 

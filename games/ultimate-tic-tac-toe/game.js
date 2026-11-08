@@ -1,5 +1,5 @@
 // Ultimate Tic-Tac-Toe
-function uttt(o){const s=bar(()=>uttt(o));let B=Array(81).fill(null),W=Array(9).fill(null),cur=0,nx=-1,over=0;const g=$('div','ut');app.append(g);
+function uttt(o){const s=bar(()=>uttt(o),'.ut');let B=Array(81).fill(null),W=Array(9).fill(null),cur=0,nx=-1,over=0;const g=$('div','ut');app.append(g);
 const L=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],wn=a=>{for(const[x,y,z]of L)if(a[x]!=null&&a[x]<2&&a[x]==a[y]&&a[y]==a[z])return a[x];return a.every(v=>v!=null)?2:null};
 const st=()=>s.innerHTML=`${dot(cur)}${names[cur]}${nx<0?' · beliebiges Feld':''}`;
 const draw=()=>{g.innerHTML='';for(let i=0;i<9;i++){const d=$('div','sb'+((nx<0||nx==i)&&W[i]==null&&!over?' act':''));
