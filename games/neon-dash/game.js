@@ -8,7 +8,8 @@ const sky=[];for(let i=0,px=0;px<1400;i++){const w=34+R(46),h=50+R(120);sky.push
 const SKW=1400,LEN=l=>3000+500*Math.min(l,12),spd=()=>Math.min(10.4,5.8+.4*lvl)*SM;
 const INTRO=['Spitzen & Blöcke','Gruben & erster Flug-Abschnitt','Sprungfelder & Türme','Sägeblätter & Kombinationen','Flug-Wellen','Volles Tempo!'];
 const reset=()=>{st=0;mode=0;y=GY-36;vy=0;rot=0;ob=[];dist=0;nxt=420;lvl=slv=o.sl;lvEnd=LEN(lvl);pStart=0;queue=FORCE[slv]?[...FORCE[slv]]:[];lastShip=slv>=2?0:9;banner=170;ceil=0;parts=[];shake=0;flash=0;nb=0;lm=-1},u=()=>s.innerHTML=`Level ${lvl} · ${Math.floor(dist/10)} m · Versuch ${att} · 🏆 ${best} m`;
-const die=()=>{if(st!=1)return;st=2;cd=Date.now()+600;shake=16;flash=.6;for(let i=0;i<30;i++)parts.push({x:PX+18,y:y+18,vx:(Math.random()-.5)*12,vy:(Math.random()-.8)*10,l:40+R(30),c:i%3?'#ffd54a':'#fff',s:3+R(5)});const m=Math.floor(dist/10);if(m>best){best=m;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
+const endIt=()=>later(()=>scoreEnd({title:nb?'Neuer Bestwert!':'Crash!',emoji:nb?'🏆':'💥',best:nb,sub:nb?'Besser warst du hier noch nie!':'Der Würfel hat ein Hindernis getroffen.',stats:[['Level',lvl],['Meter',Math.floor(dist/10)],['Bestwert',best]]}),700);
+const die=()=>{if(st!=1)return;st=2;endIt();cd=Date.now()+600;shake=16;flash=.6;for(let i=0;i<30;i++)parts.push({x:PX+18,y:y+18,vx:(Math.random()-.5)*12,vy:(Math.random()-.8)*10,l:40+R(30),c:i%3?'#ffd54a':'#fff',s:3+R(5)});const m=Math.floor(dist/10);if(m>best){best=m;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
 const press=v=>{hold=v;if(v){if(st==0){st=1;att++;u()}else if(st==2&&Date.now()>cd){reset();att++;st=1;u()}}};
 cv.onpointerdown=e=>{try{cv.setPointerCapture(e.pointerId)}catch(_){}press(1)};cv.onpointerup=cv.onpointercancel=()=>press(0);addEventListener('blur',()=>press(0));
 onkeydown=e=>{if(e.key==' '||e.key=='ArrowUp'||e.key=='w'){e.preventDefault();if(!e.repeat)press(1)}};onkeyup=e=>{if(e.key==' '||e.key=='ArrowUp'||e.key=='w')press(0)};
@@ -74,7 +75,7 @@ const pr=Math.min(1,Math.max(0,(dist-pStart)/LEN(lvl)));x.fillStyle='#0008';x.fi
 x.textAlign='center';x.fillStyle='#fff';
 if(st==0){x.fillStyle='#000a';x.fillRect(180,70,440,150);x.fillStyle='#fff';x.font='900 40px ui-rounded,system-ui,sans-serif';x.fillText('NEON-DASH',W/2,118);x.font='700 20px ui-rounded,system-ui,sans-serif';x.fillText('Tippen = springen · Halten = Dauersprung',W/2,152);x.font='600 17px ui-rounded,system-ui,sans-serif';x.fillText(`Level ${lvl}: ${INTRO[Math.min(lvl,6)-1]}`,W/2,182);x.fillText(`Bestwert ${best} m`,W/2,206)}
 if(st==1&&banner>0){x.globalAlpha=Math.min(1,banner/40);x.font='900 46px ui-rounded,system-ui,sans-serif';x.fillStyle='#fff';x.fillText(`Level ${lvl}`,W/2,120);x.font='700 22px ui-rounded,system-ui,sans-serif';x.fillText(INTRO[Math.min(lvl,6)-1],W/2,152);x.globalAlpha=1}
-if(st==2){x.fillStyle='#000b';x.fillRect(220,80,360,190);x.fillStyle='#fff';x.font='800 32px ui-rounded,system-ui,sans-serif';x.fillText('Crash!',W/2,125);x.font='700 22px ui-rounded,system-ui,sans-serif';x.fillText(`Level ${lvl} · ${Math.floor(dist/10)} m`,W/2,164);x.fillText(nb?'Neuer Bestwert! 🏆':`Bestwert ${best} m`,W/2,198);x.font='600 16px ui-rounded,system-ui,sans-serif';x.fillText('Tippen für neuen Versuch',W/2,238)}};
+};
 // ---- Spielschleife
 const cr=(cx,cy,r,rx,ry,rw,rh)=>{const nx=Math.max(rx,Math.min(cx,rx+rw)),ny=Math.max(ry,Math.min(cy,ry+rh));return Math.hypot(cx-nx,cy-ny)<r};
 reset();u();

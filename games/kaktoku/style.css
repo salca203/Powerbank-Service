@@ -3,3 +3,5 @@
 .kc b{display:inline-block;animation:pop .25s cubic-bezier(.3,1.7,.5,1)}
 .kc small{font-size:.6em;opacity:.6}
 @keyframes pop{from{transform:scale(0)}}
+.kc.cele b{animation:cele .6s ease both}
+@keyframes cele{0%,100%{transform:scale(1)}40%{transform:scale(1.5) rotate(-10deg)}70%{transform:scale(.9) rotate(6deg)}}

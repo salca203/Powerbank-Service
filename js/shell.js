@@ -34,9 +34,21 @@ const ok=$('button','start','Speichern');ok.onclick=()=>{ME={n:inp.value.trim().
 if(ME){const del=$('button','sm','Alle lokalen Daten löschen');del.onclick=()=>{try{Object.keys(localStorage).filter(k=>/^(sz-|fb|bs|bk|tt|pio|fo|kk|lo|mn|sl|sn|sk|br|cr|g48|nd|sp|fq|wo|ga)/.test(k)).forEach(k=>localStorage.removeItem(k))}catch(e){}FAV=[];REC=[];CNT={};ME=null;setMe();md.hidden=true;menu('home')};f.append(del)}modal(f)}
 const Q=$id('q');Q.oninput=()=>{QS=Q.value;if(location.hash)location.hash='';QS.trim()?menu('such'):menu('home')};$id('mb').onclick=()=>$id('side').classList.toggle('open');$id('lg').onclick=login;$id('lo').onclick=e=>{e.preventDefault();if(location.hash)location.hash='';menu('home')};setMe();
 function helpHTML(g){const h=(typeof HELP!='undefined'&&HELP[g.n])||{},li=a=>(a||[]).map(t=>`<li>${t}</li>`).join(''),sec=(t,a,ol)=>a&&a.length?`<h3>${t}</h3><${ol?'ol':'ul'}>${li(a)}</${ol?'ol':'ul'}>`:'';
-return `<h2>📖 Anleitung</h2><p><b>Ziel:</b> ${h.z||RULES[g.n]||''}</p>`+sec('So läuft ein Spiel ab',h.s,1)+(h.k?`<h3>Steuerung</h3><p>${h.k}</p>`:'')+sec('Regeln und Punkte',h.p)+sec('Einstellungen',h.o)+(h.t&&h.t.length?`<div class="tip">💡 <b>Tipps</b><ul>${li(h.t)}</ul></div>`:'')}
+return `<h2>📖 Anleitung</h2><p><b>Ziel:</b> ${h.z||RULES[g.n]||''}</p>`+sec('So läuft ein Spiel ab',h.s,1)+(h.k?`<h3>Steuerung</h3><p>${h.k}</p>`:'')+sec('Regeln und Punkte',h.p)+sec('Einstellungen',(g.o||[]).length?h.o:null)+(h.t&&h.t.length?`<div class="tip">💡 <b>Tipps</b><ul>${li(h.t)}</ul></div>`:'')}
 function helpModal(n){const g=GAMES.find(z=>z.n==n);if(!g)return;const d=$('div','hb',helpHTML(g)),b=$('button','start','Verstanden');b.onclick=()=>md.hidden=true;const w=$('div');w.append(d,b);modal(w)}
-function setup(x){clear();document.body.classList.remove('play');side();const gp=$('div','gp'),c=card(x),inf=$('div');c.onclick=c.onkeydown=null;c.removeAttribute('tabindex');inf.append($('h1',0,x.n),$('p','sub',`${META[x.n][0]} · ${META[x.n][4]} Spieler<br>${RULES[x.n]||''}`));gp.append(c,inf);app.append(gp);const o={},su=$('div','su'),L=$('div'),Rt=$('div','hb',helpHTML(x)),sv0=ld('opt-'+x.id,{});
-x.o.forEach(([k,l,v,df])=>{let di=df||0;const si=v.findIndex(z=>z[1]===sv0[k]);if(si>=0)di=si;o[k]=v[di][1];const s=$('div','seg',`<b>${l}</b>`),d=$('div');v.forEach(([t,val],i)=>{const b=$('button',i==di?'on':'',t);b.onclick=()=>{o[k]=val;sv0[k]=val;sv('opt-'+x.id,sv0);[...d.children].forEach(c=>c.className='');b.className='on'};d.append(b)});s.append(d);L.append(s)});
-const go=$('button','start','Los geht’s'),b=$('button','sm','← Menü');go.onclick=()=>start(x,o);b.onclick=menu;L.append(go,b);su.append(L,Rt);app.append(su)}
+// Spiel-Startseite: Kopfbereich mit Vorschaubild, nur sinnvolle Einstellungen, großer Startknopf, Anleitung zum Aufklappen
+const optVisible=(k,label,o)=>{if(k=='d'&&/Computer/.test(label))return o.m!=2;if(k=='rot'||k=='sit')return o.m==2;return true};
+function setup(x){clear();document.body.classList.remove('play');side();const M=META[x.n],pg=$('div','gsetup');pg.style.setProperty('--c1',M[1]);pg.style.setProperty('--c2',M[2]);
+const back=$('button','sm spback','← Alle Spiele');back.onclick=()=>menu();
+const hero=$('div','sphero'),c=card(x);c.onclick=c.onkeydown=null;c.removeAttribute('tabindex');
+const info=$('div','spinfo'),chips=$('div','spchips',`<span>${M[0]}</span><span>${M[4]} Spieler</span>${M[3].includes('n')?'<span class="nw">NEU</span>':''}`);
+info.append($('h1',0,x.n),chips,$('p','spdesc',RULES[x.n]||''));
+const o={},sv0=ld('opt-'+x.id,{}),rows=[],set=$('div','spset');
+x.o.forEach(([k,l,v,df])=>{let di=df||0;const si=v.findIndex(z=>z[1]===sv0[k]);if(si>=0)di=si;o[k]=v[di][1];const row=$('div','orow'),d=$('div','och');row.append($('b',0,l.replace(/ \(.*\)$/,'')),d);
+ v.forEach(([t2,val],i)=>{const b=$('button',i==di?'on':'',t2);b.onclick=()=>{o[k]=val;sv0[k]=val;sv('opt-'+x.id,sv0);[...d.children].forEach(z=>z.className='');b.className='on';refresh()};d.append(b)});rows.push({row,k,l});set.append(row)});
+const refresh=()=>{let n=0;rows.forEach(r=>{const vis=optVisible(r.k,r.l,o);r.row.hidden=!vis;if(vis)n++});set.hidden=!n};
+const go=$('button','start spgo','▶ Los geht’s');go.onclick=()=>start(x,o);
+info.append(set,go);hero.append(c,info);
+const hp=$('details','sphelp'),sm=$('summary',0,'<span>📖 Anleitung <small>Regeln, Steuerung und Tipps</small></span><i>▾</i>');hp.append(sm,$('div','hb',helpHTML(x)));
+pg.append(back,hero,hp);app.append(pg);refresh()}
 function start(x,o){CURG=x.n;document.body.classList.add('play');CNT[x.n]=(CNT[x.n]||0)+1;REC=[x.n,...REC.filter(n=>n!=x.n)].slice(0,12);sv('cnt',CNT);sv('rec',REC);clear();names=o.m==1?['Du','Computer']:['Spieler 1','Spieler 2'];x.f(o)}

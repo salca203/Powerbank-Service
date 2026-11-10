@@ -3,7 +3,7 @@ function ttt(o){const s=bar(()=>ttt(o),'.tt'),g=$('div','tt'),nx=$('button','sta
 const win=a=>L.find(l=>a[l[0]]!=null&&a[l[0]]==a[l[1]]&&a[l[1]]==a[l[2]])||0;
 const u=()=>s.innerHTML=`${dot(0)}${sc[0]} : ${sc[1]}${dot(1)} · `+(over==1?`${dot(cur)}${names[cur]} gewinnt! 🏆`:over==2?'Unentschieden':`${dot(cur)}${names[cur]} ist dran`);
 const draw=()=>{g.innerHTML='';const w=win(b);b.forEach((v,i)=>{const c=$('button','tc'+(w&&w.includes(i)?' win':''),v==null?'':'✕○'[v]);c.style.color=`var(--p${v})`;c.onclick=()=>{if(!over&&b[i]==null&&!(o.m==1&&cur==1))mv(i)};g.append(c)});nx.hidden=!over};
-const mv=i=>{b[i]=cur;if(win(b)){over=1;sc[cur]++}else if(b.every(v=>v!=null))over=2;else cur=1-cur;draw();u();if(!over&&o.m==1&&cur==1)later(ai,500)};
+const mv=i=>{b[i]=cur;if(win(b)){over=1;sc[cur]++}else if(b.every(v=>v!=null))over=2;else cur=1-cur;draw();u();if(over){const w=over==1?cur:-1;later(()=>duelEnd(w,{review:true,sub:'Punktestand '+sc[0]+' : '+sc[1],againLabel:'▶ Nächste Runde',again:nw}),650)}if(!over&&o.m==1&&cur==1)later(ai,500)};
 const mm=(a,p,dp)=>{const w=win(a);if(w)return a[w[0]]==1?10-dp:dp-10;if(a.every(v=>v!=null))return 0;let r=p==1?-99:99;for(let i=0;i<9;i++)if(a[i]==null){a[i]=p;const v=mm(a,1-p,dp+1);a[i]=null;r=p==1?Math.max(r,v):Math.min(r,v)}return r};
 const ai=()=>{const d=o.d??1,e=[...b.keys()].filter(i=>b[i]==null),c=[0,2,6,8].filter(i=>b[i]==null),t=p=>e.find(i=>{b[i]=p;const w=win(b);b[i]=null;return w});
 if(d==0&&R(100)<60)return mv(e[R(e.length)]);

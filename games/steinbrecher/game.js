@@ -16,7 +16,8 @@ const say=m=>{msg=m;mt=1400};
 const give=k=>{const p=PU[k];sc+=25;say(p[4]);if(k=='H'){lives=Math.min(6,lives+1)}else if(k=='B')shield=1;else if(k=='M'){const src=bl.filter(b=>!b.on);if(src.length){const b=src[0],sp=Math.hypot(b.vx,b.vy)||spd(),a=Math.atan2(b.vy,b.vx);[-.45,.45].forEach(da=>bl.push({x:b.x,y:b.y,vx:Math.cos(a+da)*sp,vy:Math.sin(a+da)*sp,on:0,off:0}))}}
 else{if(k=='W')E.N=0;if(k=='N')E.W=0;if(k=='S')E.Z=0;if(k=='Z')E.S=0;E[k]=p[2]*1000}u()};
 const hit=(b,dmg)=>{b.hp-=dmg;if(b.hp<=0){br.splice(br.indexOf(b),1);sc+=10+(5-Math.min(b.r,5))*2;if(Math.random()<DR){const pl=R(100)<22?BAD:GOOD;caps.push({x:b.x+b.w/2,y:b.y+10,k:pl[R(pl.length)]})}}else sc+=3};
-const lose=()=>{lives--;E={W:0,N:0,F:0,L:0,S:0,K:0,Z:0};shield=0;caps=[];shots=[];if(lives<=0){st=2;cd=Date.now()+600;if(sc>best){best=sc;nb=1;try{localStorage.setItem(key,best)}catch(e){}}}else ready();u()};
+const endIt=()=>later(()=>scoreEnd({title:nb?'Neuer Bestwert!':'Game Over',emoji:nb?'🏆':'🏓',best:nb,sub:nb?'Besser warst du hier noch nie!':'Alle Leben sind verbraucht.',stats:[['Punkte',sc],['Level',lv],['Bestwert',best]]}),700);
+const lose=()=>{lives--;E={W:0,N:0,F:0,L:0,S:0,K:0,Z:0};shield=0;caps=[];shots=[];if(lives<=0){st=2;endIt();cd=Date.now()+600;if(sc>best){best=sc;nb=1;try{localStorage.setItem(key,best)}catch(e){}}}else ready();u()};
 const step=d=>{if(st!=1)return;for(const k in E)if(E[k]>0)E[k]=Math.max(0,E[k]-16.67*d);pw=84*(E.W>0?1.5:1)*(E.N>0?.65:1);px=Math.max(pw/2,Math.min(W-pw/2,px));
 if(E.L>0){la-=16.67*d;if(la<=0){la=380;shots.push({x:px-pw/2+6,y:516},{x:px+pw/2-6,y:516})}}
 shots.forEach(sh=>sh.y-=9*d);shots=shots.filter(sh=>{if(sh.y<0)return 0;const b=br.find(b=>sh.x>b.x&&sh.x<b.x+b.w&&sh.y>b.y&&sh.y<b.y+b.h);if(b){hit(b,1);return 0}return 1});
@@ -40,7 +41,7 @@ let ax=8;x.font='800 12px ui-rounded,system-ui,sans-serif';x.textAlign='left';fo
 x.textAlign='center';x.fillStyle='#fff';x.font='800 20px ui-rounded,system-ui,sans-serif';
 if(st==0||(st==1&&bl.some(b=>b.on)))x.fillText('Tippen zum Abschuss · Finger bewegt den Schläger',W/2,H/2+70);
 if(mt>0){x.globalAlpha=Math.min(1,mt/400);x.font='900 26px ui-rounded,system-ui,sans-serif';x.fillText(msg,W/2,H/2+30);x.globalAlpha=1}
-if(st==2){x.fillStyle='#000c';x.fillRect(40,H/2-110,W-80,200);x.fillStyle='#fff';x.font='800 32px ui-rounded,system-ui,sans-serif';x.fillText('Game Over',W/2,H/2-60);x.font='700 24px ui-rounded,system-ui,sans-serif';x.fillText(`Punkte ${sc} · Level ${lv}`,W/2,H/2-20);x.fillText(nb?'Neuer Bestwert! 🏆':`Bestwert ${best}`,W/2,H/2+15);x.font='600 16px ui-rounded,system-ui,sans-serif';x.fillText('Tippen für neues Spiel',W/2,H/2+60)}};
+};
 const go=now=>{const d=Math.min(2.5,(now-(lt||now))/16.67);lt=now;if(mt>0)mt-=16.67*d;step(d);draw();raf=requestAnimationFrame(go)};raf=requestAnimationFrame(go)}
 
 registerGame({"id": "steinbrecher", "n": "Steinbrecher", "i": "🏓", "cat": "Action", "c": ["#ec4899", "#6366f1"], "fl": "n", "pl": "1", "rules": "Lenke den Ball mit dem Schläger und zerstöre alle Steine. Aus zerstörten Steinen fallen Power-ups, die du mit dem Schläger auffängst. Jedes Level hat ein neues Muster und harte Steine.", "o": [["d", "Schwierigkeit", [["Leicht · 5 Leben", 0], ["Mittel · 3 Leben", 1], ["Schwer · 2 Leben", 2]], 1]],f:brk});

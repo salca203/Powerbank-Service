@@ -6,7 +6,8 @@ const mk=(i,pv)=>{if(i<3)return{t:'g',tr:[]};const r=R(10);if(r<4||(pv=='w'&&r>=
 if(r<7){const n=1+R(3),v=dir*(1.2+Math.random()*2+Math.min(i/60,1.6))*DF;return{t:'r',v,cars:[...Array(n)].map((_,k)=>({x:k*W/n+R(50),w:T*(1.2+R(2)*.6),c:CC[R(5)]}))}}
 return{t:'w',v:dir*(.8+Math.random()*1.2)*(o.d==2?1.2:1),logs:[0,1,2].map(k=>({x:k*W/3+R(40),w:T*(2+R(2))}))}};
 const reset=()=>{L=[];for(let i=0;i<VR+8;i++)L.push(mk(i,i?L[i-1].t:'g'));px=W/2;pr=0;pyr=0;hp=null;cam=0;sc=0;st=0;ride=null;nb=0},u=()=>s.innerHTML=`Reihen ${sc} · 🏆 ${best}`;reset();u();
-const die=()=>{if(st!=1)return;st=2;cd=Date.now()+500;if(sc>best){best=sc;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
+const endIt=()=>later(()=>scoreEnd({title:nb?'Neuer Bestwert!':'Erwischt!',emoji:nb?'🏆':'🐔',best:nb,sub:nb?'Besser warst du hier noch nie!':'Das Huhn hat es nicht über die Straße geschafft.',stats:[['Reihen',sc],['Bestwert',best]]}),700);
+const die=()=>{if(st!=1)return;st=2;endIt();cd=Date.now()+500;if(sc>best){best=sc;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
 const hop=(dx,dy)=>{if(hp||st==2)return;if(st==0)st=1;const ty=pr+dy;if(ty<0||ty<Math.floor(cam))return;const tl=L[ty];let tx;
 if(dx){tx=Math.max(T/2,Math.min(W-T/2,px+dx*T));if(!ride)tx=(Math.floor(tx/T)+.5)*T}else tx=tl.t=='w'?px:(Math.floor(px/T)+.5)*T;
 if(tl.t=='g'&&tl.tr.includes(Math.floor(tx/T)))return;hp={t:0,x0:px,y0:pyr,x1:tx,y1:ty};ride=null};
@@ -20,7 +21,7 @@ else{x.fillStyle='#3b82c4';x.fillRect(0,y,W,T);x.fillStyle='#ffffff30';for(let k
 const by=H-T*(pyr-cam+.5),py=by-Math.sin(Math.PI*(hp?hp.t:0))*14;x.fillStyle='#0003';x.beginPath();x.ellipse(px,by+12,12,6,0,0,7);x.fill();x.fillStyle='#fff';rr(px-12,py-14,24,26,8);x.fill();x.fillStyle='#ef4444';x.fillRect(px-3,py-19,6,7);x.fillStyle='#f59e0b';x.beginPath();x.moveTo(px+12,py-4);x.lineTo(px+19,py);x.lineTo(px+12,py+3);x.fill();x.fillStyle='#111';x.beginPath();x.arc(px+5,py-6,2.5,0,7);x.fill();
 x.textAlign='center';x.lineJoin='round';x.strokeStyle='#14213d';x.lineWidth=6;x.font='800 40px ui-rounded,system-ui,sans-serif';x.fillStyle='#fff';if(st){x.strokeText(sc,W/2,52);x.fillText(sc,W/2,52)}
 if(st==0){x.font='800 20px ui-rounded,system-ui,sans-serif';x.strokeText('Tippen = vorwärts · Wischen = Seite/zurück',W/2,H-60);x.fillText('Tippen = vorwärts · Wischen = Seite/zurück',W/2,H-60)}
-if(st==2){x.fillStyle='#14213de6';x.fillRect(40,H/2-110,W-80,200);x.fillStyle='#fff';x.strokeStyle='#0000';x.font='800 34px ui-rounded,system-ui,sans-serif';x.fillText('Erwischt!',W/2,H/2-60);x.font='700 26px ui-rounded,system-ui,sans-serif';x.fillText(`Reihen ${sc}`,W/2,H/2-15);x.fillText(nb?'Neuer Bestwert! 🏆':`Bestwert ${best}`,W/2,H/2+25);x.font='600 18px ui-rounded,system-ui,sans-serif';x.fillText('Tippen für neuen Versuch',W/2,H/2+65)}};
+};
 const go=now=>{const d=Math.min(2.5,(now-(lt||now))/16.67);lt=now;
 if(st==1){L.forEach(l=>{if(l.t=='r')l.cars.forEach(c=>{c.x+=l.v*d;if(l.v>0&&c.x>W)c.x=-c.w;if(l.v<0&&c.x<-c.w)c.x=W});if(l.t=='w')l.logs.forEach(g=>{g.x+=l.v*d;if(l.v>0&&g.x>W)g.x=-g.w;if(l.v<0&&g.x<-g.w)g.x=W})});
 if(hp){hp.t=Math.min(1,hp.t+d*16.67/120);px=hp.x0+(hp.x1-hp.x0)*hp.t;pyr=hp.y0+(hp.y1-hp.y0)*hp.t;if(hp.t>=1){pr=hp.y1;pyr=pr;px=hp.x1;hp=null;if(pr>sc){sc=pr;u()}const l=L[pr];if(l.t=='w'){const g=l.logs.find(g=>px>=g.x&&px<=g.x+g.w);if(g)ride={g,o:px-g.x};else die()}}}

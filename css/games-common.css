@@ -7,3 +7,35 @@
 .kc.bad{box-shadow:inset 0 0 0 100px #ff1f1f66}
 .hint{opacity:.7;font-weight:500;text-align:center;margin:6px 0;font-size:15px}
 .rot180{transform:rotate(180deg)}
+/* ---- Ergebnis-Bildschirm (Gewinn / Niederlage / Unentschieden) ---- */
+.endov{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:16px;background:radial-gradient(circle at 50% 40%,#2a1d6acc,#0a0618ee);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:endfade .35s ease both;--ec:#ffd166;overflow:hidden}
+.endov.lose{--ec:#ef476f;background:radial-gradient(circle at 50% 40%,#3a0f24cc,#0a0618ee)}
+.endov.draw{--ec:#5ad8e6;background:radial-gradient(circle at 50% 40%,#12304acc,#0a0618ee)}
+@keyframes endfade{from{opacity:0}}
+.endcard{position:relative;z-index:2;text-align:center;background:linear-gradient(160deg,#241a52,#150f33);border:2px solid color-mix(in srgb,var(--ec) 55%,transparent);border-radius:30px;padding:30px 36px 26px;width:min(520px,94vw);box-shadow:0 0 0 6px color-mix(in srgb,var(--ec) 16%,transparent),0 30px 80px #000c,0 0 70px color-mix(in srgb,var(--ec) 35%,transparent);animation:endpop .7s cubic-bezier(.2,1.5,.4,1) both}
+.endov.lose .endcard{animation:endpop .6s cubic-bezier(.2,1.4,.4,1) both,endshake .55s .5s ease}
+@keyframes endpop{0%{transform:scale(.3) translateY(60px);opacity:0}100%{transform:none;opacity:1}}
+@keyframes endshake{0%,100%{transform:none}20%{transform:translateX(-12px) rotate(-1deg)}40%{transform:translateX(10px) rotate(1deg)}60%{transform:translateX(-7px)}80%{transform:translateX(4px)}}
+.endem{font-size:clamp(76px,16vh,128px);line-height:1.05;animation:endem 1.6s .5s ease-in-out infinite;filter:drop-shadow(0 8px 14px #0008)}
+.endov.win .endem{animation:endwin 1.1s .4s cubic-bezier(.3,1.6,.5,1) both,endem 1.8s 1.5s ease-in-out infinite}
+.endov.lose .endem{animation:enddrop .8s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes endem{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
+@keyframes endwin{0%{transform:scale(0) rotate(-200deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes enddrop{0%{transform:translateY(-140px) scale(1.5);opacity:0}60%{transform:translateY(8px) scale(.95);opacity:1}100%{transform:none}}
+.endt{margin:6px 0 4px;font-size:clamp(30px,5.4vh,46px);line-height:1.12;font-weight:900;color:#fff;text-shadow:0 0 28px var(--ec);animation:endup .5s .25s ease both}
+.ends{margin:4px 0 6px;font-size:19px;opacity:.85;font-weight:600;animation:endup .5s .35s ease both}
+.endbest{display:inline-block;margin:6px 0;padding:6px 16px;border-radius:999px;background:var(--y);color:#14213d;font-weight:900;font-size:18px;animation:endup .5s .4s ease both,endglow 1.4s .9s ease-in-out infinite}
+@keyframes endglow{50%{box-shadow:0 0 26px #ffd166}}
+@keyframes endup{from{opacity:0;transform:translateY(18px)}}
+.endst{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 6px;animation:endup .5s .45s ease both}
+.endsc{min-width:92px;background:#ffffff12;border-radius:16px;padding:10px 16px}
+.endsc b{display:block;font-size:30px;line-height:1.1}.endsc small{opacity:.7;font-weight:600;font-size:14px}
+.endbtn{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:18px;animation:endup .5s .55s ease both}
+.endbtn .start{margin:0;font-size:22px;padding:15px 30px;background:linear-gradient(135deg,#6842ff,#c026d3);box-shadow:0 8px 24px #6842ff88}
+.endbtn .sm{padding:15px 22px;font-size:18px;font-weight:800}
+.endrev{margin-top:12px;background:none;opacity:.65;text-decoration:underline;font-size:15px;font-weight:600}
+.endpill{position:fixed;z-index:71;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--br);color:#fff;border-radius:999px;padding:12px 22px;font-weight:800;box-shadow:0 6px 22px #000a;animation:pillin .4s ease both}
+@keyframes pillin{from{opacity:0;transform:translateX(-50%) translateY(18px)}}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.confetti i{position:absolute;top:-30px;border-radius:2px;animation:conf linear infinite}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}100%{transform:translate(var(--dx),110vh) rotate(var(--rt));opacity:.9}}

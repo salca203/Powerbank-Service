@@ -5,7 +5,7 @@ const nb=i=>{const r=i>>3,j=i&7,a=[r*8+(j+1)%8,r*8+(j+7)%8];if(j%2){if(r)a.push(
 const cnt=p=>b.filter(v=>v===p).length+hand[p],mill=(i,p)=>M.some(l=>l.includes(i)&&l.every(x=>b[x]===p)),fly=p=>!hand[p]&&cnt(p)==3,
 rm=p=>{const a=[...b.keys()].filter(i=>b[i]===p),f=a.filter(i=>!mill(i,p));return f.length?f:a},
 mv=p=>{const r=[];b.forEach((v,i)=>{if(v===p)(fly(p)?[...b.keys()].filter(j=>b[j]==null):nb(i).filter(j=>b[j]==null)).forEach(j=>r.push([i,j]))});return r};
-const end=()=>{const n=1-cur;if(cnt(n)<3||(!hand[n]&&!mv(n).length))over=cur;else cur=n},after=()=>{draw();if(over<0&&o.m==1&&cur==1)later(ai,650)};
+const end=()=>{const n=1-cur;if(cnt(n)<3||(!hand[n]&&!mv(n).length)){over=cur;const w=over;later(()=>duelEnd(w,{review:true,sub:cnt(n)<3?'Nur noch zwei Steine übrig.':'Kein Zug mehr möglich.'}),800)}else cur=n},after=()=>{draw();if(over<0&&o.m==1&&cur==1)later(ai,650)};
 const click=i=>{if(over>=0)return;
 if(rem){if(!rm(1-cur).includes(i))return;b[i]=null;rem=0;end();after();return}
 if(hand[cur]){if(b[i]!=null)return;b[i]=cur;hand[cur]--;if(mill(i,cur))rem=1;else end();sel=null;after();return}

@@ -1,3 +1,5 @@
 .sl{position:relative;width:min(100%,calc(var(--dvh,100vh) - 157px),760px);aspect-ratio:1;margin:10px auto 0;background:#2a2358;border-radius:14px;font-size:min(10vw,50px)}
 .st2{position:absolute;left:0;top:0;padding:0;background:none;transition:transform .16s ease;font-weight:900;color:#fff}
 .st2::before{content:'';position:absolute;inset:3px;border-radius:10px;background:linear-gradient(135deg,#7c5cff,#c026d3);z-index:-1}.st2{z-index:0;isolation:isolate}
+.st2.wave{animation:swave .5s ease both}
+@keyframes swave{40%{filter:brightness(1.6);scale:1.12}}

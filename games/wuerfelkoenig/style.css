@@ -1,0 +1,2 @@
+.dc.roll{animation:droll .12s linear infinite}
+@keyframes droll{0%{transform:rotate(-14deg) translateY(-4px)}50%{transform:rotate(12deg) translateY(3px)}100%{transform:rotate(-14deg) translateY(-4px)}}
