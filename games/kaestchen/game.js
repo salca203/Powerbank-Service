@@ -5,7 +5,7 @@ const adj=(y,x)=>(y%2?[[y,x-1],[y,x+1]]:[[y-1,x],[y+1,x]]).filter(([a,b])=>a>0&&
 const u=()=>s.innerHTML=`${dot(cur)}${names[cur]} · ${sc[0]} : ${sc[1]}`;
 const put=(y,x)=>{const k=y+','+x;if(ln[k]!=null)return;ln[k]=cur;E[k].style.background=`var(--p${cur})`;let got=0;
 adj(y,x).forEach(([a,b])=>{if(sd(a,b)==4){got++;sc[cur]++;tot++;const e=E[a+','+b];e.textContent='●';e.style.color=`var(--p${cur})`}});
-if(tot==n*n){const w=+(sc[1]>sc[0]);s.innerHTML=sc[0]==sc[1]?'Unentschieden':dot(w)+names[w]+' gewinnt! 🏆';return}
+if(tot==n*n){const w=+(sc[1]>sc[0]);s.innerHTML=sc[0]==sc[1]?'Unentschieden':dot(w)+names[w]+' gewinnt! 🏆';later(()=>duelEnd(sc[0]==sc[1]?-1:w,{review:true,sub:'Endstand '+sc[0]+' : '+sc[1],stats:[[names[0],sc[0]],[names[1],sc[1]]]}),700);return}
 if(!got)cur=1-cur;u();if(o.m==1&&cur==1)later(ai,600)};
 const chain=(y,x)=>{const seen=new Set(),q=[];adj(y,x).forEach(([a,b])=>{if(sd(a,b)==2)q.push([a,b])});for(let i=0;i<q.length;i++){const[a,b]=q[i],k=a+','+b;if(seen.has(k))continue;seen.add(k);[[-1,0],[1,0],[0,-1],[0,1]].forEach(([p,c])=>{if(ln[(a+p)+','+(b+c)]==null){const na=a+2*p,nb=b+2*c;if(na>0&&nb>0&&na<N&&nb<N&&sd(na,nb)==2)q.push([na,nb])}})}return seen.size};
 const ai=()=>{const d=o.d??1,f=Object.keys(E).filter(k=>ln[k]==null&&E[k].tagName=='BUTTON').map(k=>k.split(',').map(Number)),w=([y,x])=>adj(y,x).reduce((r,[a,b])=>r+({3:10,2:-5}[sd(a,b)]||0),0);

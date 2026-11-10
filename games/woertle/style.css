@@ -6,3 +6,6 @@
 .wc.a,.wkb.a{background:#3b3558;border-color:#3b3558}
 .wk{display:grid;gap:6px;margin-top:14px}
 .wkb{min-width:min(8.2vw,40px);height:50px;background:#2c2455;border-radius:8px;padding:0 6px}
+.wc.flip{animation:wflip .55s ease both}
+.wc.flip:nth-child(2){animation-delay:.1s}.wc.flip:nth-child(3){animation-delay:.2s}.wc.flip:nth-child(4){animation-delay:.3s}.wc.flip:nth-child(5){animation-delay:.4s}.wc.flip:nth-child(6){animation-delay:.5s}
+@keyframes wflip{0%{transform:rotateX(90deg);filter:brightness(2)}100%{transform:none}}

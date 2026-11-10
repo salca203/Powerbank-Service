@@ -5,7 +5,7 @@ add(13,'1/1/3/2','sto');for(let i=0;i<6;i++){add(12-i,`1/${i+2}`,'pit');add(i,`2
 s.innerHTML=over?(b[6]==b[13]?'Unentschieden':dot(+(b[13]>b[6]))+names[+(b[13]>b[6])]+' gewinnt! 🏆'):`${dot(cur)}${names[cur]} · ${cur?'obere':'untere'} Reihe`};
 const sim=(b,cur,i)=>{b=[...b];let n=b[i],j=i;b[i]=0;while(n){j=(j+1)%14;if(j==(cur?6:13))continue;b[j]++;n--}const st=cur?13:6,own=cur?j>6&&j<13:j<6;if(own&&b[j]==1&&b[12-j]){b[st]+=1+b[12-j];b[j]=b[12-j]=0}let ov=0;
 if(!b.slice(0,6).some(x=>x)||!b.slice(7,13).some(x=>x)){b[6]+=b.slice(0,6).reduce((p,q)=>p+q);b[13]+=b.slice(7,13).reduce((p,q)=>p+q);for(let k=0;k<6;k++)b[k]=b[k+7]=0;ov=1}return{b,cur:ov||j==st?cur:1-cur,ov}};
-const sow=i=>{const r=sim(b,cur,i);b=r.b;cur=r.cur;over=r.ov;draw();if(!over&&o.m==1&&cur==1)later(ai,700)};
+const sow=i=>{const r=sim(b,cur,i);b=r.b;cur=r.cur;over=r.ov;draw();if(over){const a=b[6],c2=b[13];later(()=>duelEnd(a==c2?-1:+(c2>a),{review:true,sub:'Endstand '+a+' : '+c2,stats:[[names[0],a],[names[1],c2]]}),800)}if(!over&&o.m==1&&cur==1)later(ai,700)};
 const mm=(b,cur,dp,al,be)=>{const ms=(cur?[7,8,9,10,11,12]:[0,1,2,3,4,5]).filter(i=>b[i]);if(!dp||!ms.length)return b[13]-b[6];let bs=cur?-1e9:1e9;for(const i of ms){const r=sim(b,cur,i),v=r.ov?(r.b[13]-r.b[6])*2:mm(r.b,r.cur,dp-1,al,be);if(cur){bs=Math.max(bs,v);al=Math.max(al,v)}else{bs=Math.min(bs,v);be=Math.min(be,v)}if(al>=be)break}return bs};
 const ai=()=>{const d=o.d??1,m=[7,8,9,10,11,12].filter(i=>b[i]);if(d==0)return sow(m[R(m.length)]);if(d==1)return sow(m.find(i=>i+b[i]==13)??m[R(m.length)]);let bs=-1e9,bm=m[0];shuf(m).forEach(i=>{const r=sim(b,1,i),v=r.ov?(r.b[13]-r.b[6])*2:mm(r.b,r.cur,7,-1e9,1e9);if(v>bs){bs=v;bm=i}});sow(bm)};draw()}
 

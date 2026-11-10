@@ -1,3 +1,3 @@
 // Reihenfolge der Spiele. Neues Spiel: Ordner unter games/ anlegen und hier die ID eintragen.
-const VER='4'; // Bei jedem Update erhöhen, damit Browser keine alten Dateien nutzen
+const VER='5'; // Bei jedem Update erhöhen, damit Browser keine alten Dateien nutzen
 const GAME_IDS=["schach", "vier-in-einer-reihe", "reversi", "muehle", "mancala", "tic-tac-toe", "ultimate-tic-tac-toe", "paare-finden", "kaestchen", "wuerfelkoenig", "blasenschuss", "block-blitz", "kaktoku", "shikaku", "zahlenfusion", "blockfall", "minenfeld", "schiebepuzzle", "farbflut", "lichter-aus", "farbfolge", "flaggen-quiz", "woertle", "galgenmaennchen", "air-hockey", "flatterflug", "neon-dash", "spiral-sprung", "strassenhuepfer", "farbland", "schlangenjagd", "steinbrecher", "turmbau", "tap-duell", "tauziehen"];

@@ -7,7 +7,8 @@ if(ok){for(let a=-1;a<=1;a++)for(let b=-1;b<=1;b++)ow[(cy+b)*G+cx+a]=p.id;Object
 const reset=()=>{ow=Array(G*G).fill(-1);tr=Array(G*G).fill(-1);P=[...Array(NB+1).keys()].map(id=>({id,alive:0,rt:0}));P.forEach(spawn);st=0;kills=0;nb=0;acc=0;peak=0;u()};reset();
 const die=(p,by)=>{if(!p.alive)return;p.alive=0;for(let i=0;i<G*G;i++){if(tr[i]==p.id)tr[i]=-1;if(ow[i]==p.id)ow[i]=-1}if(by==0&&p.id)kills++;if(p.id)p.rt=2500};
 
-const fin=()=>{st=2;cd=Date.now()+500;if(peak>best){best=peak;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
+const endIt=()=>later(()=>scoreEnd({title:nb?'Neuer Bestwert!':'Eingekreist!',emoji:nb?'🏆':'🟥',best:nb,sub:nb?'Besser warst du hier noch nie!':'Deine Spur wurde getroffen.',stats:[['Höchster Landanteil %',peak],['Besiegt',kills]]}),700);
+const fin=()=>{st=2;endIt();cd=Date.now()+500;if(peak>best){best=peak;nb=1;try{localStorage.setItem(key,best)}catch(e){}}u()};
 const capture=p=>{const id=p.id,bar=new Uint8Array(G*G),out=new Uint8Array(G*G),q=[];for(let i=0;i<G*G;i++)if(ow[i]==id||tr[i]==id)bar[i]=1;const push=i=>{if(!bar[i]&&!out[i]){out[i]=1;q.push(i)}};
 for(let k=0;k<G;k++){push(k);push((G-1)*G+k);push(k*G);push(k*G+G-1)}for(let h=0;h<q.length;h++){const i=q[h],cx=i%G,cy=(i/G)|0;if(cx>0)push(i-1);if(cx<G-1)push(i+1);if(cy>0)push(i-G);if(cy<G-1)push(i+G)}
 for(let i=0;i<G*G;i++){if(tr[i]==id)tr[i]=-1;if(bar[i]||!out[i])ow[i]=id}};
@@ -23,7 +24,7 @@ onkeydown=e=>{const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft
 const draw=()=>{x.fillStyle='#161233';x.fillRect(0,0,W,W);for(let i=0;i<G*G;i++){const cx=i%G*CS,cy=((i/G)|0)*CS;if(ow[i]>=0){x.fillStyle=COL[ow[i]]+'bb';x.fillRect(cx,cy,CS,CS)}if(tr[i]>=0){x.fillStyle=COL[tr[i]]+'77';x.fillRect(cx+2,cy+2,CS-4,CS-4)}}
 const t=Math.min(1,acc/STEP);P.forEach(p=>{if(!p.alive)return;const qx=(p.px+(p.x-p.px)*t)*CS,qy=(p.py+(p.y-p.py)*t)*CS;x.fillStyle='#0004';x.fillRect(qx,qy+2,CS,CS);x.fillStyle=COL[p.id];x.fillRect(qx-1,qy-1,CS+2,CS+2);x.fillStyle='#fff';x.fillRect(qx+2,qy+3,3,3);x.fillRect(qx+6,qy+3,3,3)});
 x.textAlign='center';x.fillStyle='#fff';x.font='800 22px ui-rounded,system-ui,sans-serif';if(st==0)x.fillText('Wischen oder Pfeiltasten: Land einkreisen!',W/2,W-30);
-if(st==2){x.fillStyle='#14213de6';x.fillRect(80,W/2-100,W-160,190);x.fillStyle='#fff';x.font='800 32px ui-rounded,system-ui,sans-serif';x.fillText('Eingekreist!',W/2,W/2-50);x.font='700 24px ui-rounded,system-ui,sans-serif';x.fillText(`Höchstens ${peak}% Land`,W/2,W/2-10);x.fillText(nb?'Neuer Bestwert! 🏆':`Bestwert ${best}%`,W/2,W/2+28);x.font='600 16px ui-rounded,system-ui,sans-serif';x.fillText('Tippen für neues Spiel',W/2,W/2+65)}};
+};
 const go=now=>{const d=Math.min(60,now-(lt||now));lt=now;if(st==1){acc+=d;while(acc>=STEP){acc-=STEP;P.forEach(step);if(!P[0].alive){fin();break}const c=pct();if(c>peak)peak=c;u()}P.forEach(p=>{if(!p.alive&&p.id&&p.rt>0){p.rt-=d;if(p.rt<=0)spawn(p)}})}draw();raf=requestAnimationFrame(go)};
 raf=requestAnimationFrame(go)}
 

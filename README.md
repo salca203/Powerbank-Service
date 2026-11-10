@@ -74,3 +74,7 @@ mit einer App wie Working Copy.
 * `impressum.html` und `datenschutz.html`: gelbe Platzhalter durch echte Angaben ersetzen und die Texte rechtlich prüfen lassen.
 * Feedback-Formular: öffnet das Mailprogramm mit der Adresse aus `js/shell.js` (Konstante `MAIL`).
 * Profil, Favoriten und Bestwerte liegen nur im Browser des Besuchers (localStorage).
+
+## Ergebnis-Bildschirm (Gewinn / Niederlage)
+
+`js/core.js` enthält `endScreen({...})`, `duelEnd(sieger, {...})` und `scoreEnd({...})`. Sie zeigen mittig einen großen animierten Dialog mit „Nochmal“ und „Zurück ins Menü“. Neue Spiele sollten am Ende dieses statt einer Textzeile im Kopf verwenden. Für Partikel-Effekte in Canvas-Spielen gibt es `FX()`.
