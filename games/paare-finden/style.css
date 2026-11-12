@@ -1,0 +1,5 @@
+.mem{display:grid;gap:8px;justify-content:center;margin:0 auto}
+.mem .card{position:static;width:var(--z);height:var(--z);aspect-ratio:auto;border-radius:14px;background:var(--p1);font-size:var(--f);padding:0;line-height:1;display:grid;place-items:center;overflow:hidden}
+.mem .card.up{background:var(--card);animation:memflip .3s ease}
+.mem .card.ok{opacity:.4}
+@keyframes memflip{from{transform:rotateY(90deg) scale(.9)}to{transform:none}}
