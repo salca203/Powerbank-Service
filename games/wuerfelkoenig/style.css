@@ -1,2 +1,9 @@
-.dc.roll{animation:droll .12s linear infinite}
-@keyframes droll{0%{transform:rotate(-14deg) translateY(-4px)}50%{transform:rotate(12deg) translateY(3px)}100%{transform:rotate(-14deg) translateY(-4px)}}
+.kn{display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-start}
+.kn .kd{display:flex;flex-direction:column;gap:12px;align-items:center}
+.kn .dice{display:flex;gap:6px}
+.kn .dc{font-size:min(13vw,calc(var(--dvh,100vh)/7),78px);background:var(--card);border-radius:14px;padding:0 4px;line-height:1.15}
+.kn .dc.h{background:var(--y);color:#14213d}
+.kn .kt{border-collapse:collapse}
+.kn .kt td,.kn .kt th{padding:0 12px;height:max(30px,calc((var(--dvh,100vh) - 110px)/15));font-size:clamp(13px,calc((var(--dvh,100vh) - 110px)/15 - 12px),18px);border-bottom:1px solid var(--line);text-align:center;white-space:nowrap}
+.kn .kt td:first-child{text-align:left}
+.kn .kt .pk{background:var(--y);color:#14213d;cursor:pointer}

@@ -1,7 +1,0 @@
-.kk{display:grid;width:min(100%,calc(var(--dvh,100vh) - 132px),760px);margin:0 auto;border:3px solid #3b2a1a;border-radius:12px;overflow:hidden;background:#3b2a1a}
-.kc{aspect-ratio:1;padding:0;border-style:solid;border-color:#3b2a1a;font-size:min(7.5vw,40px);line-height:1;color:#3b2a1a}
-.kc b{display:inline-block;animation:pop .25s cubic-bezier(.3,1.7,.5,1)}
-.kc small{font-size:.6em;opacity:.6}
-@keyframes pop{from{transform:scale(0)}}
-.kc.cele b{animation:cele .6s ease both}
-@keyframes cele{0%,100%{transform:scale(1)}40%{transform:scale(1.5) rotate(-10deg)}70%{transform:scale(.9) rotate(6deg)}}

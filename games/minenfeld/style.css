@@ -1,5 +1,0 @@
-.mf{display:grid;gap:3px;width:min(100%,calc(var(--dvh,100vh) - 177px),760px);margin:10px auto 0}
-.mc{aspect-ratio:1;padding:0;border-radius:6px;background:#3a3070;font-size:min(4.4vw,24px);font-weight:900;line-height:1}
-.mc.open{background:#1c1840;cursor:default}.n1{color:#60a5fa}.n2{color:#4ade80}.n3{color:#f87171}.n4{color:#c084fc}.n5{color:#fb923c}.n6{color:#22d3ee}.n7{color:#e5e7eb}.n8{color:#9ca3af}
-.mc.boom{animation:boom .45s ease both}
-@keyframes boom{0%{transform:scale(1)}40%{transform:scale(1.5);background:#ef4444}100%{transform:scale(1)}}
